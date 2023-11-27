@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Forensic Framework</title>
+    <title>Complicated Devoted Gull</title>
     <meta property="og:title" content="Complicated Devoted Gull" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="utf-8" />
@@ -57,17 +57,14 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    <!--<link rel="stylesheet" href="./style.css" /> -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
     <div>
-      <link href="{{ url_for('static', filename='index.css') }}" rel="stylesheet" />
+      <!-- <link href="./index.css" rel="stylesheet" /> -->
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='index.css') }}">
 
-	<div class="home-header">
-        <h1 class = "home-hero-heading0">
-            Digital Forensics Framework
-        </h1>
-        </div>	
-	
       <div class="home-container">
+        <div class="home-header"></div>
         <div class="home-hero">
           <h1 class="home-hero-heading heading1">
             Welcome to your&nbsp; Digital Forensics Framework
@@ -80,15 +77,21 @@
           >
             Get Started
           </a>
-          
+          <h1 class="home-hero-heading1 heading1">
+            Digital Forensics Framework
+          </h1>
         </div>
         <div id="digital-forensic-description" class="home-details">
           <div class="home-container1">
             <h2 class="home-details-heading heading2">
-              <span class="home-text">Digital Forensic Analysis</span>
-              <br /><br/>
+              <span class="home-text">Digital&nbsp; Forensic Analysis</span>
+              <br />
             </h2>
-            <button id="df-get-started-button" onclick="document.getElementById('storage-forensic-description').scrollIntoView({ behavior: 'smooth' });" class="home-hero-button11 button">
+            <button
+              id="df-get-started-button"
+              onclick="document.getElementById('storage-forensic-description').scrollIntoView({ behavior: 'smooth' });"
+              class="home-hero-button11 button"
+            >
               Get Started
             </button>
             <span class="home-details-sub-heading">
@@ -99,7 +102,7 @@
               <br class="home-text03" />
               <br class="home-text04" />
               <span class="home-text05">
-                Think of it this way: If you're looking at data stored on a
+                Think of it this way: if you're looking at data stored on a
                 device like a hard drive, your journey begins with Storage
                 Forensics. However, if you're working with data retrieved from a
                 memory dump, Memory Forensics is where you'll want to start your
@@ -120,11 +123,11 @@
           <div class="home-container2">
             <h2 class="home-details-heading1 heading2">Storage Forensics</h2>
             <form method="POST" action="/storage_forensics">
-            <button class="home-hero-button12 button" type="submit">
+           <!-- <a href="storage.html" class="home-hero-button12 button">
               Get Started
-            </button>
+            </a> -->
+            <button class='home-hero-button12' type='submit'>Get Started</button>
             </form>
-            
             <span class="home-details-sub-heading1">
               Learn the fundamentals of storage forensics and uncover valuable
               evidence stored in digital devices. Our courses cover topics such
@@ -139,11 +142,9 @@
         </div>
         <div id="memory-forensic-description" class="home-details2">
           <div class="home-container3">
-            <form method="POST" action="/memory_forensics">
-            <button class="home-hero-button13 button" type="submit">
+           <!-- <a href="memory.html" class="home-hero-button13 button">
               Get Started
-            </button>
-            </form>
+            </a> -->
             <h2 class="home-details-heading2 heading2">
               Memory Forensics:&nbsp;
             </h2>
@@ -152,6 +153,12 @@
               evidence stored in digital devices. Our courses cover topics such
               as file systems, data recovery, and analysis techniques.
             </span>
+            <form method="POST" action="/memory_forensics">
+           <!-- <a href="storage.html" class="home-hero-button12 button">
+              Get Started
+            </a> -->
+            <button class='home-hero-button13' type='submit'>Get Started</button>
+            </form>
           </div>
           <img
             alt="image"
@@ -165,13 +172,11 @@
               <div class="home-container4">
                 <span class="home-text09 sectionTitle">
                   <span>FAQ</span>
-                  <br /><br />
+                  <br />
                 </span>
                 <h2 class="home-text12 heading2">Common questions</h2>
-                
                 <span class="home-text13">
                   <span>
-                  <br />
                     Here are some of the most common questions that we get.
                   </span>
                   <br />
@@ -204,7 +209,6 @@
                   </span>
                   <span class="question-text1">
                     <span>
-                    <br />
                       Storage forensics is the process of analyzing and
                       extracting data from storage devices such as hard drives,
                       solid-state drives, and USB drives to investigate and
@@ -214,12 +218,10 @@
                 </div>
                 <div class="question-container">
                   <span class="question-text heading4">
-                  <br />
                     <span>What is memory forensics?</span>
                   </span>
                   <span class="question-text1">
                     <span>
-                    <br />
                       Memory forensics involves the analysis and examination of
                       a computer's volatile memory (RAM) to retrieve valuable
                       information such as running processes, network
@@ -230,12 +232,10 @@
                 </div>
                 <div class="question-container">
                   <span class="question-text heading4">
-                  <br />
                     <span>Why is storage forensics important?</span>
                   </span>
                   <span class="question-text1">
                     <span>
-                    <br />
                       Storage forensics plays a crucial role in digital
                       investigations as it allows investigators to recover
                       deleted or hidden files, track user activities, and
@@ -245,12 +245,10 @@
                 </div>
                 <div class="question-container">
                   <span class="question-text heading4">
-                  <br />
                     <span>How is memory forensics useful?</span>
                   </span>
                   <span class="question-text1">
                     <span>
-                    <br />
                       Memory forensics provides investigators with real-time
                       insights into a system's current state, allowing them to
                       identify active malware, detect malicious activities, and
@@ -262,13 +260,12 @@
                 <div class="question-container">
                   <span class="question-text heading4">
                     <span>
-                    <br />
-                      What tools are commonly used in storage and memory forensics?
+                      What tools are commonly used in storage and memory
+                      forensics?
                     </span>
                   </span>
                   <span class="question-text1">
                     <span>
-                    <br />
                       Popular tools for storage forensics include EnCase, FTK
                       Imager, and Autopsy. For memory forensics, tools like
                       Volatility Framework, Rekall, and WinDbg are widely used.
@@ -285,11 +282,15 @@
             <div class="home-container6"></div>
             <div class="home-separator"></div>
             <span class="home-text31">
-              Dhruv Suvarna, Mahesh KM, Mahika Gupta, Sonal Gabburi&nbsp;
+              Dhruv Suvarna, Mahesh KM, Mahika Gupta, Sonal Gabburi
             </span>
           </footer>
         </div>
       </div>
     </div>
+    <script
+      data-section-id="navbar"
+      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
+    ></script>
   </body>
 </html>

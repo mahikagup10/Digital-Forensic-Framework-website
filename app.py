@@ -6,57 +6,81 @@ app = Flask(__name__)
 
 mem_address = "" 
 
+
 @app.route('/')
 def choose_forensics():
     return render_template('index.html')
 
 @app.route('/storage_forensics', methods=['GET', 'POST'])
 def storage_forensics():
+    with open('file_address.txt', 'r') as file:
+        storage_address = file.read().strip() 
+    output = ""
     if request.method == 'POST':
         #return redirect(url_for('storage_forensics'))
-        return render_template('storage.html')
-    return render_template('storage.html')
+        action = request.form.get('action')
+        
+        if action=='img_stat':
+            command = ["img_stat",storage_address]
+        # Compile the C program if not already compiled
+            subprocess.run(command)
+
+        # Replace '/path/to/your/image.dd' with the actual path to your forensic image file
+            try:
+                output = subprocess.check_output(command, stderr=subprocess.STDOUT, text=True)
+            # Wrap the output in <pre> tags and replace newlines with <br> tags
+                output = '<pre>' + output.replace('\n', '<br>') + '</pre>'
+                return output
+            except subprocess.CalledProcessError as e:
+            # Handle errors here, for example:
+                return jsonify(error="An error occurred during img_stat execution.")
+        
+        #return render_template('storage.html')
+    return render_template('storage.html', output=output)
+    
+
+#def disk_image_info():
+#    global mem_address
+#    with open('file_address.txt', 'r') as file:
+#        storage_address = file.read().strip()
+
+    # Logic to retrieve disk image info
+#    try:
+#        command = ["img_stat", storage_address]
+#        subprocess.run(command)
+#        output = subprocess.check_output(command, stderr=subprocess.STDOUT, text=True)
+#        disk_image_output = output.replace('\n', '<br>')  # Remove <pre> tags
+#    except subprocess.CalledProcessError as e:
+#        return jsonify(error="An error occurred during img_stat execution.")
+
+#    return jsonify({'output': disk_image_output}) 
+
+@app.route('/partition_info', methods=['POST'])
+def disk_partition_info():
+    global mem_address
+    with open('file_address.txt', 'r') as file:
+        storage_address = file.read().strip()
+
+    # Logic to retrieve disk partition info
+    try:
+        command = ['mmls', storage_address]
+        subprocess.run(command)
+        output = subprocess.check_output(command, stderr=subprocess.STDOUT, text=True)
+        partition_info_output = output.replace('\n', '<br>')  # Remove <pre> tags
+    except subprocess.CalledProcessError as e:
+        return jsonify(error="An error occurred during mmls execution.")
+
+    return jsonify({'output': partition_info_output})
     
 @app.route('/memory_forensics', methods=['GET', 'POST'])
 def memory_forensics():
     return render_template('memory.html')
+    
+@app.route('/mem-printkey.html')
+def mem_printkey():
+    # Code to render mem-printkey.html template or perform actions
+    return render_template('mem-printkey.html')
 
-
-@app.route('/storage-fls.html')
-def storage_fls():
-	return render_template('storage-fls.html')
-	
-@app.route('/storage-fsstat.html')
-def storage_fsstat():
-	return render_template('storage-fsstat.html')
-	
-@app.route('/storage-ils.html')
-def storage_ils():
-	return render_template('storage-ils.html')
-	
-@app.route('/storage-jpegextract.html')
-def storage_jpegextract():
-	return render_template('storage-jpegextract.html')
-	
-@app.route('/storage-icat.html')
-def storage_icat():
-	return render_template('storage-icat.html')
-	
-@app.route('/storage-istat.html')
-def storage_istat():
-	return render_template('storage-istat.html')
-	
-@app.route('/storage-sorter.html')
-def storage_sorter():
-	return render_template('storage-sorter.html')
-	
-@app.route('/storage-stringsearch.html')
-def storage_stringsearch():
-	return render_template('storage-stringsearch.html')
-	
-@app.route('/storage-tskrecover.html')
-def storage_recover():
-	return render_template('storage-tskrecover.html')
 
 @app.route('/storage_upload',methods=['POST'])	
 def upload_file():
@@ -230,7 +254,7 @@ def memory_tools():
                
     
     # Return the appropriate response or render the necessary template
-    return render_template('memory_tools.html', output=output)  # Rendering the memory tools page
+    return render_template('memory.html', output=output)  # Rendering the memory tools page
     
     
     
@@ -264,20 +288,20 @@ def execute():
         # For example:
         action = request.form.get('action')
 	
-    if action == 'img_stat':
-        # Compile and execute img_stat tool
-        command = ["img_stat",storage_address]
-        # Compile the C program if not already compiled
-        subprocess.run(command)
+#    if action == 'img_stat':
+#       # Compile and execute img_stat tool
+#        command = ["img_stat",storage_address]
+#        # Compile the C program if not already compiled
+#        subprocess.run(command)
 
         # Replace '/path/to/your/image.dd' with the actual path to your forensic image file
-        try:
-            output = subprocess.check_output(command, stderr=subprocess.STDOUT, text=True)
+#        try:
+#            output = subprocess.check_output(command, stderr=subprocess.STDOUT, text=True)
             # Wrap the output in <pre> tags and replace newlines with <br> tags
-            output = '<pre>' + output.replace('\n', '<br>') + '</pre>'
-        except subprocess.CalledProcessError as e:
+#            output = '<pre>' + output.replace('\n', '<br>') + '</pre>'
+#        except subprocess.CalledProcessError as e:
             # Handle errors here, for example:
-            return jsonify(error="An error occurred during img_stat execution.")
+#            return jsonify(error="An error occurred during img_stat execution.")
 
     if action == 'mmls':
         # Compile and execute mmls tool
@@ -496,8 +520,6 @@ def execute():
 
     #print(type(output))
     return output
-
-        
 
 if __name__ == '__main__':
     app.run(debug=True)
