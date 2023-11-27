@@ -10,33 +10,35 @@ mem_address = ""
 @app.route('/')
 def choose_forensics():
     return render_template('index.html')
+    
 
 @app.route('/storage_forensics', methods=['GET', 'POST'])
 def storage_forensics():
+    if request.method == 'POST':
+        #return redirect(url_for('storage_forensics'))
+        return render_template('storage.html')
+    return render_template('storage.html')
+
+@app.route('/image_info', methods=['GET', 'POST'])
+def disk_image_info():
     with open('file_address.txt', 'r') as file:
         storage_address = file.read().strip() 
     output = ""
     if request.method == 'POST':
-        #return redirect(url_for('storage_forensics'))
         action = request.form.get('action')
         
-        if action=='img_stat':
-            command = ["img_stat",storage_address]
-        # Compile the C program if not already compiled
-            subprocess.run(command)
-
-        # Replace '/path/to/your/image.dd' with the actual path to your forensic image file
-            try:
-                output = subprocess.check_output(command, stderr=subprocess.STDOUT, text=True)
-            # Wrap the output in <pre> tags and replace newlines with <br> tags
-                output = '<pre>' + output.replace('\n', '<br>') + '</pre>'
-                return output
-            except subprocess.CalledProcessError as e:
-            # Handle errors here, for example:
-                return jsonify(error="An error occurred during img_stat execution.")
         
-        #return render_template('storage.html')
-    return render_template('storage.html', output=output)
+        if action == 'img_stat':
+            command = ["img_stat", storage_address]
+            subprocess.run(command)
+            try:
+                # Execute img_stat command
+                output = subprocess.check_output(command, stderr=subprocess.STDOUT, text=True)
+                # Wrap the output in <pre> tags and replace newlines with <br> tags
+                output = '<pre>' + output.replace('\n', '<br>') + '</pre>'
+            except subprocess.CalledProcessError as e:
+                return jsonify(error="An error occurred during img_stat execution.")
+    return output  # Return the output as plain text
     
 
 #def disk_image_info():
@@ -277,7 +279,6 @@ def upload_dump():
 
 @app.route('/execute', methods=['GET','POST'])
 def execute():
-    global mem_address
     with open('file_address.txt', 'r') as file:
         storage_address = file.read().strip() 
     output = ""
