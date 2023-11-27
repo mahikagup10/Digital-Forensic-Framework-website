@@ -14,48 +14,28 @@ def choose_forensics():
 
 @app.route('/storage_forensics', methods=['GET', 'POST'])
 def storage_forensics():
-    if request.method == 'POST':
-        #return redirect(url_for('storage_forensics'))
-        return render_template('storage.html')
     return render_template('storage.html')
 
 @app.route('/image_info', methods=['GET', 'POST'])
-def disk_image_info():
+def image_info():
     with open('file_address.txt', 'r') as file:
         storage_address = file.read().strip() 
     output = ""
     if request.method == 'POST':
         action = request.form.get('action')
-        
-        
         if action == 'img_stat':
             command = ["img_stat", storage_address]
-            subprocess.run(command)
+            #subprocess.run(command)
             try:
                 # Execute img_stat command
                 output = subprocess.check_output(command, stderr=subprocess.STDOUT, text=True)
                 # Wrap the output in <pre> tags and replace newlines with <br> tags
                 output = '<pre>' + output.replace('\n', '<br>') + '</pre>'
+                return  output
             except subprocess.CalledProcessError as e:
                 return jsonify(error="An error occurred during img_stat execution.")
-    return output  # Return the output as plain text
+    return render_template('storage.html', output=output)
     
-
-#def disk_image_info():
-#    global mem_address
-#    with open('file_address.txt', 'r') as file:
-#        storage_address = file.read().strip()
-
-    # Logic to retrieve disk image info
-#    try:
-#        command = ["img_stat", storage_address]
-#        subprocess.run(command)
-#        output = subprocess.check_output(command, stderr=subprocess.STDOUT, text=True)
-#        disk_image_output = output.replace('\n', '<br>')  # Remove <pre> tags
-#    except subprocess.CalledProcessError as e:
-#        return jsonify(error="An error occurred during img_stat execution.")
-
-#    return jsonify({'output': disk_image_output}) 
 
 @app.route('/partition_info', methods=['POST'])
 def disk_partition_info():
