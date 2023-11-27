@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Memory - Complicated Devoted Gull</title>
+    <meta property="og:title" content="Memory - Complicated Devoted Gull" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
+
+    <style data-tag="reset-style-sheet">
+      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
+    </style>
+    <style data-tag="default-style-sheet">
+      html {
+        font-family: Inter;
+        font-size: 16px;
+      }
+
+      body {
+        font-weight: 400;
+        font-style:normal;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: normal;
+        line-height: 1.15;
+        color: var(--dl-color-gray-black);
+        background-color: var(--dl-color-gray-white);
+
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <style>
+      @keyframes fade-in-left {
+        0% {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        100% {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <link rel="stylesheet" href="./style.css" />
+    <div>
+      <link href="./memory.css" rel="stylesheet" />
+
+      <div class="memory-container">
+        <div class="memory-header"></div>
+        <div class="memory-container01">
+          <div class="memory-hero">
+            <div class="memory-container02">
+              <h1 class="memory-hero-heading heading1">Memory Dump Analysis</h1>
+              <span class="memory-hero-sub-heading">
+                Unlock the secrets hidden in memory dumps
+              </span>
+              <div class="memory-btn-group">
+                <a
+                  href="#Install-dependencies"
+                  class="memory-hero-button1 button"
+                >
+                  Get Started
+                </a>
+                <a
+                  href="#faq-container"
+                  scrollintoview="behaviour:'smooth'"
+                  class="memory-hero-button2 button"
+                >
+                  Learn More&nbsp;→
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="memory-details">
+          <div class="memory-container03">
+            <h2 class="memory-details-heading heading2">
+              What is a memory dump?
+            </h2>
+            <span class="memory-details-sub-heading">
+              In the realm of digital forensics, a memory dump, also known as a
+              RAM dump or system dump, serves as a snapshot of a computer's
+              memory at a specific point in time. This snapshot captures
+              valuable data about the system's state, including running
+              processes, network connections, open files, and encryption keys,
+              among other details. Memory dumps play a crucial role in incident
+              investigations, providing forensic examiners with insights into
+              the activities that occurred on a system prior to an incident,
+              such as a security breach or system crash.
+            </span>
+          </div>
+          <img
+            alt="image"
+            src="https://cyberhoot.com/wp-content/uploads/2020/11/how-to-free-up-RAM-hero-1024x576.jpg"
+            class="memory-details-image"
+          />
+        </div>
+        <div class="memory-details1">
+          <div class="memory-container04">
+            <h2
+              id="Install-dependencies"
+              class="memory-details-heading1 heading2"
+            >
+              <span class="memory-text">To get started:</span>
+              <br />
+              <span>Install Dependencies</span>
+              <br />
+            </h2>
+            <span class="memory-details-sub-heading1">
+              This framework involves the use of the Volatility Framework and
+              various other tools like Hashcat, memdump, etc. For the framework
+              function correctly, it needs these tools to be installed in your
+              system. Worry not, for we have automated this process for you. All
+              you have to do is click the button.
+            </span>
+            <button
+              id="install-dependencies-btn"
+              class="memory-hero-button11 button"
+            >
+              Install Dependencies
+            </button>
+          </div>
+        </div>
+        <div class="memory-features">
+          <div class="memory-features-container">
+            <h2 class="memory-features-heading heading2">
+              Upload Your Memory Dump and View it's Information&nbsp;
+            </h2>
+            <div class="memory-features1">
+              <div class="memory-container05">
+                <div class="memory-feature-card">
+                  <form
+                    id="memory-upload-form"
+                    action="/memory_upload"
+                    method="POST"
+                    enctype="multipart/form-data"
+                    class="memory-form"
+                  >
+                    <button
+                      id="file-upload-button"
+                      name="Submit"
+                      type="submit"
+                      class="memory-button button"
+                    >
+                      Upload Memory Dump
+                    </button>
+                    <input
+                      type="file"
+                      id="memory-upload-form"
+                      name="file"
+                      accept=".mem, .dump"
+                      placeholder="placeholder"
+                      class="memory-textinput input"
+                    />
+                  </form>
+                  <div class="memory-container06">
+                    <h3 class="memory-text04 heading3">Upload Memory Dump</h3>
+                  </div>
+                  <div style="display: none;" class="memory-feature-card1">
+                    <span class="memory-text05">
+                      Memory dump uploaded successfully
+                    </span>
+                  </div>
+                </div>
+                <div class="memory-feature-card2">
+                  <p class="memory-text06">
+                    For a high level summary of the memory sample you’re
+                    analyzing, use the imageinfo command. Most often this
+                    command is used to identify the profile, operating system,
+                    service pack and hardware architecture, but it also contains
+                    other useful information such as the DTB address and time
+                    the sample was collected.
+                  </p>
+                  <div class="memory-container07">
+                    <h3 class="memory-text07 heading3">
+                      View Memory Dump Information
+                    </h3>
+                  </div>
+                  <form class="memory-form1">
+                    <button
+                      id="mem-image-info-button"
+                      type="submit"
+                      class="memory-hero-button12 button"
+                    >
+                      <span class="memory-text08">
+                        <span>View Dump Info</span>
+                        <br />
+                      </span>
+                    </button>
+                    <input
+                      type="hidden"
+                      name="action"
+                      value="memimageinfo"
+                      placeholder="placeholder"
+                      class="memory-textinput1 input"
+                    />
+                  </form>
+                </div>
+                <div id="output-container" class="memory-feature-card3">
+                  <div class="memory-container08">
+                    <h3 class="memory-text11 heading3">
+                      Memory Dump Information
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="memory-details2">
+          <div class="memory-container09">
+            <h2 class="memory-details-heading2 heading2">
+              <span>Set Profile</span>
+              <br />
+            </h2>
+            <span class="memory-details-sub-heading2">
+              The imageinfo output tells you the suggested profile that you
+              should pass as the parameter to --profile=PROFILE when using other
+              plugins. There may be more than one profile suggestion if profiles
+              are closely related.
+            </span>
+            <form id="profile-form" method="POST" class="memory-form2">
+              <input
+                type="text"
+                id="profile-input"
+                name="profile"
+                placeholder="Enter Profile"
+                class="memory-textinput2 input"
+              />
+              <button
+                id="set-profile-button"
+                type="submit"
+                class="memory-hero-button13 button"
+              >
+                Set Profile
+              </button>
+            </form>
+            <div
+              id="success-banner"
+              style="display: none; background-color: lightgreen; padding: 10px;"
+              class="memory-container10"
+            >
+              <span class="memory-text14">Profile set successfully!</span>
+            </div>
+          </div>
+        </div>
+        <div class="memory-features2">
+          <div class="memory-gallery">
+            <h1 class="memory-gallery-heading heading2">
+              Memory Forensic Tools
+            </h1>
+            <div class="memory-container11">
+              <a href="mem-printkey.html">
+                <div class="memory-container12">
+                  <h3 class="memory-text15 heading3">View Registry Keys</h3>
+                  <h3 class="memory-text16 heading3">
+                    <span class="memory-text17">
+                      This functionality uses the printkey plugin to display
+                      registry keys and their values.
+                    </span>
+                    <br />
+                  </h3>
+                  <h3 class="memory-text19 heading3">
+                    <span class="memory-text20">
+                      This functionality uses the psscan plugin to display
+                      hidden processes in the memory.
+                    </span>
+                    <br />
+                  </h3>
+                </div>
+              </a>
+              <a href="mem-netscan.html">
+                <div class="memory-container13">
+                  <h3 class="memory-text22 heading3">
+                    <span>View all network connections</span>
+                    <br />
+                  </h3>
+                  <h3 class="memory-text25 heading3">
+                    <span class="memory-text26">
+                      This functionality uses the netscan plugin to&nbsp;display
+                      network-related information.
+                    </span>
+                    <br />
+                  </h3>
+                  <h3 class="memory-text28 heading3">
+                    <span class="memory-text29">
+                      This functionality uses the cmdline plugin to display
+                      previously executed commands.
+                    </span>
+                    <br />
+                  </h3>
+                  <h3 class="memory-text31 heading3">
+                    <span class="memory-text32">
+                      This functionality uses the hashdump plugin to extract
+                      NTLM hashed passwords which can be decrypted with
+                      Hashcat..
+                    </span>
+                    <br />
+                  </h3>
+                  <h3 class="memory-text34 heading3">
+                    <span class="memory-text35">
+                      This functionality uses the pslist plugin to&nbsp;display
+                      running processes from the memory.
+                    </span>
+                    <br />
+                  </h3>
+                </div>
+              </a>
+              <a href="mem-pslist.html">
+                <div class="memory-container14">
+                  <h3 class="memory-text37 heading3">View all processes</h3>
+                </div>
+              </a>
+              <a href="mem-psxview.html">
+                <div class="memory-container15">
+                  <h3 class="memory-text38 heading3">
+                    <span>View hidden processes</span>
+                    <br />
+                  </h3>
+                </div>
+              </a>
+              <a href="mem-cmdline.html">
+                <div class="memory-container16">
+                  <h3 class="memory-text41 heading3">
+                    <span>Display Command line history</span>
+                    <br />
+                  </h3>
+                </div>
+              </a>
+              <a href="mem-hashdump-crackpass.html">
+                <div class="memory-container17">
+                  <h3 class="memory-text44 heading3">
+                    <span>Extract password hashes</span>
+                    <br />
+                    <br />
+                  </h3>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="memory-faq">
+          <div id="faq-container" class="memory-faq-container">
+            <div class="memory-faq1">
+              <div class="memory-container18">
+                <span class="memory-text48 sectionTitle">
+                  <span>FAQ</span>
+                  <br />
+                </span>
+                <h2 class="memory-text51 heading2">Common questions</h2>
+                <span class="memory-text52">
+                  <span>
+                    Here are some of the most common questions that we get.
+                  </span>
+                  <br />
+                  <span>
+                    <span>
+                      <span></span>
+                      <span></span>
+                    </span>
+                    <span>
+                      <span></span>
+                      <span></span>
+                    </span>
+                  </span>
+                  <span>
+                    <span>
+                      <span></span>
+                      <span></span>
+                    </span>
+                    <span>
+                      <span></span>
+                      <span></span>
+                    </span>
+                  </span>
+                </span>
+              </div>
+              <div class="memory-container19">
+                <div class="question-container">
+                  <span class="question-text heading4">
+                    <span>What is storage forensics?</span>
+                  </span>
+                  <span class="question-text1">
+                    <span>
+                      Storage forensics is the process of analyzing and
+                      extracting data from storage devices such as hard drives,
+                      solid-state drives, and USB drives to investigate and
+                      gather evidence for legal or investigative purposes.
+                    </span>
+                  </span>
+                </div>
+                <div class="question-container">
+                  <span class="question-text heading4">
+                    <span>What is memory forensics?</span>
+                  </span>
+                  <span class="question-text1">
+                    <span>
+                      Memory forensics involves the analysis and examination of
+                      a computer's volatile memory (RAM) to retrieve valuable
+                      information such as running processes, network
+                      connections, and encryption keys for forensic
+                      investigations.
+                    </span>
+                  </span>
+                </div>
+                <div class="question-container">
+                  <span class="question-text heading4">
+                    <span>Why is storage forensics important?</span>
+                  </span>
+                  <span class="question-text1">
+                    <span>
+                      Storage forensics plays a crucial role in digital
+                      investigations as it allows investigators to recover
+                      deleted or hidden files, track user activities, and
+                      uncover evidence related to cybercrimes or data breaches.
+                    </span>
+                  </span>
+                </div>
+                <div class="question-container">
+                  <span class="question-text heading4">
+                    <span>How is memory forensics useful?</span>
+                  </span>
+                  <span class="question-text1">
+                    <span>
+                      Memory forensics provides investigators with real-time
+                      insights into a system's current state, allowing them to
+                      identify active malware, detect malicious activities, and
+                      recover valuable artifacts that may not be present on
+                      disk.
+                    </span>
+                  </span>
+                </div>
+                <div class="question-container">
+                  <span class="question-text heading4">
+                    <span>
+                      What tools are commonly used in storage and memory
+                      forensics?
+                    </span>
+                  </span>
+                  <span class="question-text1">
+                    <span>
+                      Popular tools for storage forensics include EnCase, FTK
+                      Imager, and Autopsy. For memory forensics, tools like
+                      Volatility Framework, Rekall, and WinDbg are widely used.
+                    </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="memory-footer">
+          <footer class="memory-footer1">
+            <div class="memory-container20"></div>
+            <span class="memory-text69">Digital Forensic Framework</span>
+            <div class="memory-separator"></div>
+            <span class="memory-text70">
+              Dhruv Suvarna, Mahesh KM, Mahika Gupta, Sonal Gabburi
+            </span>
+          </footer>
+        </div>
+        <a href="index.html" class="memory-hero-button14 button">Home</a>
+      </div>
+    </div>
+    <script
+      data-section-id="navbar"
+      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
+    ></script>
+  </body>
+</html>

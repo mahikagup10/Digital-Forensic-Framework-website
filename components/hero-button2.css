@@ -1,0 +1,24 @@
+.hero-button2-container {
+  display: flex;
+  position: relative;
+}
+.hero-button2-hero-button2 {
+  color: var(--dl-color-gray-black);
+  transition: 0.3s;
+  font-weight: bold;
+  padding-top: var(--dl-space-space-unit);
+  border-color: transparent;
+  padding-left: var(--dl-space-space-twounits);
+  padding-right: var(--dl-space-space-twounits);
+  padding-bottom: var(--dl-space-space-unit);
+  background-color: transparent;
+}
+.hero-button2-hero-button2:hover {
+  border-color: var(--dl-color-gray-white);
+}
+@media(max-width: 479px) {
+  .hero-button2-hero-button2 {
+    margin-top: var(--dl-space-space-unit);
+    margin-left: 0px;
+  }
+}
