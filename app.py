@@ -22,6 +22,42 @@ def memory_forensics():
     return render_template('memory.html')
 
 
+@app.route('/storage-fls.html')
+def storage_fls():
+	return render_template('storage-fls.html')
+	
+@app.route('/storage-fsstat.html')
+def storage_fsstat():
+	return render_template('storage-fsstat.html')
+	
+@app.route('/storage-ils.html')
+def storage_ils():
+	return render_template('storage-ils.html')
+	
+@app.route('/storage-jpegextract.html')
+def storage_jpegextract():
+	return render_template('storage-jpegextract.html')
+	
+@app.route('/storage-icat.html')
+def storage_icat():
+	return render_template('storage-icat.html')
+	
+@app.route('/storage-istat.html')
+def storage_istat():
+	return render_template('storage-istat.html')
+	
+@app.route('/storage-sorter.html')
+def storage_sorter():
+	return render_template('storage-sorter.html')
+	
+@app.route('/storage-stringsearch.html')
+def storage_stringsearch():
+	return render_template('storage-stringsearch.html')
+	
+@app.route('/storage-tskrecover.html')
+def storage_recover():
+	return render_template('storage-tskrecover.html')
+
 @app.route('/storage_upload',methods=['POST'])	
 def upload_file():
 	global fileaddress
@@ -194,7 +230,7 @@ def memory_tools():
                
     
     # Return the appropriate response or render the necessary template
-    return render_template('memory.html', output=output)  # Rendering the memory tools page
+    return render_template('memory_tools.html', output=output)  # Rendering the memory tools page
     
     
     
@@ -460,6 +496,8 @@ def execute():
 
     #print(type(output))
     return output
+
+        
 
 if __name__ == '__main__':
     app.run(debug=True)
