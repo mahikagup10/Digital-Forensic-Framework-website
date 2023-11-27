@@ -6,9 +6,16 @@ app = Flask(__name__)
 
 mem_address = "" 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def choose_forensics():
+    if request.method == 'POST':
+        return render_template('index.html')
+
     return render_template('index.html')
+
+#@app.route('/')
+#def choose_forensics():
+#    return render_template('index.html')
 
 @app.route('/storage_forensics', methods=['GET', 'POST'])
 def storage_forensics():
@@ -19,8 +26,36 @@ def storage_forensics():
     
 @app.route('/memory_forensics', methods=['GET', 'POST'])
 def memory_forensics():
+    if request.method == 'POST':
+        #return redirect(url_for('storage_forensics'))
+        return render_template('memory.html')
     return render_template('memory.html')
+    
+@app.route('/mem-printkey.html')
+def mem_printkey():
+	return render_template('mem-printkey.html')
+	
+@app.route('/mem-psxview.html')
+def mem_psxview():
+	return render_template('mem-psxview.html')
+	
+@app.route('/mem-netscan.html')
+def mem_netscan():
+	return render_template('mem-netscan.html')
+@app.route('/mem-cmdline.html')
+def mem_cmdline():
+	return render_template('mem-cmdline.html')
+@app.route('/mem-pslist.html')
+def mem_pslist():
+	return render_template('mem-pslist.html')
+@app.route('/mem-hashdump-crackpass.html')
+def mem_hashdump_crackpass():
+	return render_template('mem-hashdump-crackpass.html')
+	
+	
 
+
+	
 
 @app.route('/storage_upload',methods=['POST'])	
 def upload_file():
