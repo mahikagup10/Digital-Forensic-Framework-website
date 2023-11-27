@@ -57,9 +57,9 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
     <div>
-      <link href="./memory.css" rel="stylesheet" />
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='memory.css') }}" />
 
       <div class="memory-container">
         <div class="memory-header"></div>
@@ -475,7 +475,13 @@
             </span>
           </footer>
         </div>
-        <a href="index.html" class="memory-hero-button14 button">Home</a>
+        <!--<a href="index.html" class="memory-hero-button14 button">Home</a>-->
+        <form method="POST" action="/">
+          <button class='memory-hero-button14 button' type='submit'>Home</button>
+          </form>
+
+        
+
       </div>
     </div>
     <script
