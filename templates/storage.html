@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Storage - Complicated Devoted Gull</title>
+    <title>Storage-Forensics</title>
     <meta property="og:title" content="Storage - Complicated Devoted Gull" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="utf-8" />
@@ -57,9 +57,9 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
     <div>
-      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='storage.css') }}" />
+      <link href="{{ url_for('static', filename='storage.css') }}" rel="stylesheet" />
 
       <div class="storage-container">
         <div class="storage-header"></div>
@@ -71,7 +71,9 @@
             <span class="storage-hero-sub-heading">
               Unlock the secrets hidden in captured images of your storage
               devices
+              </br /></br />
             </span>
+            
             <div class="storage-btn-group">
               <a
                 href="#features-upload-image-info"
@@ -80,7 +82,7 @@
                 Get Started
               </a>
               <a href="#faq-container" class="storage-hero-button2 button">
-                Learn More&nbsp;→
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Learn More&nbsp;→
               </a>
             </div>
           </div>
@@ -126,7 +128,7 @@
                       type="file"
                       name="file"
                       accept=".mem, .dump, .dd"
-                      placeholder="placeholder"
+                      placeholder="No file choosen"
                       class="storage-textinput input"
                     />
                     <button
@@ -134,13 +136,7 @@
                       type="submit"
                       class="storage-button button"
                     >
-                  <!--    <span>
-                        <span class="storage-text01">
-                          Upload Forensic Image
-                        </span>
-                        <br />
-                      </span> -->
-                      Upload Forensic Image
+                      Upload Forensic Image   
                     </button>
                   </form>
                   <div class="storage-container05">
@@ -215,7 +211,7 @@
                 </div>
                 <div id="output-container" class="storage-feature-card3">
                   <div class="storage-container12">
-                    <h3 class="storage-text07 heading3">Output</h3>
+                    <h3 class="storage-text07 heading3">Output:</h3>
                   </div>
                 </div>
               </div>
@@ -248,11 +244,11 @@
               Storage Forensic Tools
             </h1>
             <div class="storage-container14">
-              <a href="storage-fls.html">
-                <div class="storage-container15">
-                  <h3 class="storage-text12 heading3">
+              <form method="POST" action="/execute">
+                <button class="storage-container15" type="submit">
+                  <h2 class="storage-text12 heading3">
                     View Files and Directories
-                  </h3>
+                  </h2>
                   <h3 class="storage-text13 heading3">
                     <span class="storage-text14">
                       Use fls to list allocated and deleted files and
@@ -260,14 +256,14 @@
                     </span>
                     <br />
                   </h3>
-                </div>
-              </a>
-              <a href="storage-fsstat.html">
-                <div class="storage-container16">
-                  <h3 class="storage-text16 heading3">
+                </button>
+              </form>
+              <form method="POST" action="/execute">
+                <button class="storage-container16" type="submit">
+                  <h2 class="storage-text16 heading3">
                     <span>View File System Statistics of a Partition</span>
                     <br />
-                  </h3>
+                  </h2>
                   <h3 class="storage-text19 heading3">
                     <span class="storage-text20">
                       Use fsstat to view file system statistics and details
@@ -275,21 +271,21 @@
                     </span>
                     <br />
                   </h3>
-                </div>
-              </a>
-              <a href="storage-ils.html">
-                <div class="storage-container17">
+                </button>
+              </form>
+              <form method="POST" action="/execute">
+                <button class="storage-container17" type="submit">
                   <h3 class="storage-text22 heading3">
                     Use ils command to list inode structures and their
                     information.
                   </h3>
-                  <h3 class="storage-text23 heading3">
+                  <h2 class="storage-text23 heading3">
                     View Inode Information
-                  </h3>
-                </div>
-              </a>
-              <a href="storage-jpegextract.html">
-                <div class="storage-container18">
+                  </h2>
+                </button>
+              </form>
+              <form method="POST" action="/execute">
+                <button class="storage-container18" type="submit">
                   <h3 class="storage-text24 heading3">
                     <span class="storage-text25">
                       Use jpeg_extract to export all jpeg images onto a local
@@ -297,14 +293,14 @@
                     </span>
                     <br />
                   </h3>
-                  <h3 class="storage-text27 heading3">
+                  <h2 class="storage-text27 heading3">
                     <span>Extract Images from the disk</span>
                     <br />
-                  </h3>
-                </div>
-              </a>
-              <a href="storage-sorter.html">
-                <div class="storage-container19">
+                  </h2>
+                </button>
+              </form>
+              <form method="POST" action="/execute">
+                <button class="storage-container19" type="submit">
                   <h3 class="storage-text30 heading3">
                     <span class="storage-text31">
                       Sorter sorts files based on their file type while also
@@ -312,14 +308,14 @@
                     </span>
                     <br />
                   </h3>
-                  <h3 class="storage-text33 heading3">
+                  <h2 class="storage-text33 heading3">
                     <span>Extract Files based on File Type&nbsp;</span>
                     <br />
-                  </h3>
-                </div>
-              </a>
-              <a href="storage-icat.html">
-                <div class="storage-container20">
+                  </h2>
+                </button>
+              </form>
+              <form method="POST" action="/execute">
+                <button class="storage-container20" type="submit">
                   <h3 class="storage-text36 heading3">
                     <span class="storage-text37">
                       Use icat to view the data units of a file, specified by
@@ -327,17 +323,17 @@
                     </span>
                     <br />
                   </h3>
-                  <h3 class="storage-text39 heading3">
+                  <h2 class="storage-text39 heading3">
                     <span>View File Contents</span>
                     <br />
-                  </h3>
-                </div>
-              </a>
-              <a href="storage-stringsearch.html">
-                <div class="storage-container21">
-                  <h3 class="storage-text42 heading3">
+                  </h2>
+                </button>
+              </form>
+              <form method="POST" action="/execute">
+                <button class="storage-container21" type="submit">
+                  <h2 class="storage-text42 heading3">
                     Search for a particular string in a partition
-                  </h3>
+                  </h2>
                   <h3 class="storage-text43 heading3">
                     <span class="storage-text44">
                       tsk_recover extracts the unallocated or allocated files
@@ -345,14 +341,14 @@
                     </span>
                     <br />
                   </h3>
-                  <h3 class="storage-text46 heading3">
+                  <h2 class="storage-text46 heading3">
                     <span>Search for a String</span>
                     <br />
-                  </h3>
-                </div>
-              </a>
-              <a href="storage-istat.html">
-                <div class="storage-container22">
+                  </h2>
+                </button>
+              </form>
+              <form method="POST" action="/execute">
+                <button class="storage-container22" type="submit">
                   <h3 class="storage-text49 heading3">
                     <span class="storage-text50">
                       This functionality uses the hashdump plugin to extract
@@ -361,20 +357,20 @@
                     </span>
                     <br />
                   </h3>
-                  <h3 class="storage-text52 heading3">
+                  <h2 class="storage-text52 heading3">
                     <span>View Metadata Structure Information</span>
                     <br />
-                  </h3>
-                </div>
-              </a>
-              <a href="storage-tskrecover.html">
-                <div class="storage-container23">
-                  <h3 class="storage-text55 heading3">
+                  </h2>
+                </button>
+              </form>
+              <form method="POST" action="/execute">
+                <button class="storage-container23" type="submit">
+                  <h2 class="storage-text55 heading3">
                     <span>Extract all files from Partition</span>
                     <br />
-                  </h3>
-                </div>
-              </a>
+                  </h2>
+                </button>
+              </form>
             </div>
           </div>
         </div>
@@ -384,11 +380,12 @@
               <div class="storage-container24">
                 <span class="storage-text58 sectionTitle">
                   <span>FAQ</span>
-                  <br />
+                  <br /><br />
                 </span>
                 <h2 class="storage-text61 heading2">Common questions</h2>
                 <span class="storage-text62">
                   <span>
+                  <br />
                     Here are some of the most common questions that we get.
                   </span>
                   <br />
@@ -417,10 +414,12 @@
               <div class="storage-container25">
                 <div class="question-container">
                   <span class="question-text heading4">
+                  <br />
                     <span>What is storage forensics?</span>
                   </span>
                   <span class="question-text1">
                     <span>
+                    <br />
                       Storage forensics is the process of analyzing and
                       extracting data from storage devices such as hard drives,
                       solid-state drives, and USB drives to investigate and
@@ -430,10 +429,12 @@
                 </div>
                 <div class="question-container">
                   <span class="question-text heading4">
+                  <br />
                     <span>What is memory forensics?</span>
                   </span>
                   <span class="question-text1">
                     <span>
+                    <br />
                       Memory forensics involves the analysis and examination of
                       a computer's volatile memory (RAM) to retrieve valuable
                       information such as running processes, network
@@ -444,10 +445,12 @@
                 </div>
                 <div class="question-container">
                   <span class="question-text heading4">
+                  <br />
                     <span>Why is storage forensics important?</span>
                   </span>
                   <span class="question-text1">
                     <span>
+                    <br />
                       Storage forensics plays a crucial role in digital
                       investigations as it allows investigators to recover
                       deleted or hidden files, track user activities, and
@@ -457,10 +460,12 @@
                 </div>
                 <div class="question-container">
                   <span class="question-text heading4">
+                  <br />
                     <span>How is memory forensics useful?</span>
                   </span>
                   <span class="question-text1">
                     <span>
+                    <br />
                       Memory forensics provides investigators with real-time
                       insights into a system's current state, allowing them to
                       identify active malware, detect malicious activities, and
@@ -471,6 +476,7 @@
                 </div>
                 <div class="question-container">
                   <span class="question-text heading4">
+                  <br />
                     <span>
                       What tools are commonly used in storage and memory
                       forensics?
@@ -478,6 +484,7 @@
                   </span>
                   <span class="question-text1">
                     <span>
+                    <br />
                       Popular tools for storage forensics include EnCase, FTK
                       Imager, and Autopsy. For memory forensics, tools like
                       Volatility Framework, Rekall, and WinDbg are widely used.
@@ -490,20 +497,15 @@
         </div>
         <div class="storage-footer">
           <footer class="storage-footer1">
-            <div class="storage-container26"></div>
             <span class="storage-text79">Digital Forensic Framework</span>
             <div class="storage-separator"></div>
             <span class="storage-text80">
-              Dhruv Suvarna, Mahesh KM, Mahika Gupta, Sonal Gabburi
+              Dhruv Suvarna, Mahesh KM, Mahika Gupta, Sonal Gabburi&nbsp;
             </span>
           </footer>
         </div>
         <a href="index.html" class="storage-hero-button13 button">Home</a>
       </div>
     </div>
-    <script
-      data-section-id="navbar"
-      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
-    ></script>
   </body>
 </html>
