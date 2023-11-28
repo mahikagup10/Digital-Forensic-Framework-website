@@ -340,6 +340,7 @@
   background-color: var(--dl-color-success-500);
 }
 .memory-text05 {
+  padding-bottom: 5px;
   height: 50px;
   font-family: "Raleway";
 }
@@ -385,19 +386,19 @@
   left: 1px;
   color: var(--dl-color-gray-white);
   width: 218px;
-  bottom: -94px;
+  bottom: -120px;
   height: 39px;
   position: absolute;
   font-size: 18px;
   transition: 0.3s;
   font-weight: bold;
-  padding-top: 1.5rem;
+  padding-top: 20px;
   border-color: var(--dl-color-primary1-blue100);
   border-width: 0px;
   padding-left: 3rem;
   border-radius: 45px;
   padding-right: 3rem;
-  padding-bottom: 1.5rem;
+  padding-bottom: 1px;
   background-color: var(--dl-color-gray-black);
 }
 .memory-hero-button12:hover {
@@ -406,7 +407,7 @@
   background-color: rgba(41, 20, 119, 0.9);
 }
 .memory-text08 {
-  top: 14px;
+  top: 10px;
   left: 36px;
   margin: auto;
   position: absolute;
@@ -444,6 +445,7 @@
   font-family: "Raleway";
   font-weight: 600;
   line-height: 28px;
+  padding-bottom: 20px;
 }
 .memory-details2 {
   width: 100%;

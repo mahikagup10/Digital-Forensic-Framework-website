@@ -135,6 +135,7 @@
             >
               Install Dependencies
             </button>
+            <p id="install-status"></p>
           </div>
         </div>
         <div class="memory-features">
@@ -172,7 +173,7 @@
                   <div class="memory-container06">
                     <h3 class="memory-text04 heading3">Upload Memory Dump</h3>
                   </div>
-                  <div style="display: none;" class="memory-feature-card1">
+                  <div id="upload-banner" style="display: none;" class="memory-feature-card1">
                     <span class="memory-text05">
                       Memory dump uploaded successfully
                     </span>
@@ -185,14 +186,14 @@
                     command is used to identify the profile, operating system,
                     service pack and hardware architecture, but it also contains
                     other useful information such as the DTB address and time
-                    the sample was collected.
+                    the sample was collected. Make note of the various 'Suggested Profiles' and use them to continue your analysis.
                   </p>
                   <div class="memory-container07">
                     <h3 class="memory-text07 heading3">
                       View Memory Dump Information
                     </h3>
                   </div>
-                  <form class="memory-form1">
+                  <form id="mem-image-info-form" action="/mem-image-info" method="POST" class="memory-form1">
                     <button
                       id="mem-image-info-button"
                       type="submit"
@@ -212,12 +213,10 @@
                     />
                   </form>
                 </div>
-                <div id="output-container" class="memory-feature-card3">
-                  <div class="memory-container08">
+                <div class="memory-feature-card3">
                     <h3 class="memory-text11 heading3">
                       Memory Dump Information
-                    </h3>
-                  </div>
+                    </h3><div id="output-container"></div>
                 </div>
               </div>
             </div>
@@ -235,7 +234,7 @@
               plugins. There may be more than one profile suggestion if profiles
               are closely related.
             </span>
-            <form id="profile-form" method="POST" class="memory-form2">
+              <form id="profile-form" action="/set_profile" method="POST" class="memory-form2">
               <input
                 type="text"
                 id="profile-input"
@@ -475,12 +474,136 @@
             </span>
           </footer>
         </div>
-        <a href="index.html" class="memory-hero-button14 button">Home</a>
+         <!--<a href="index.html" class="memory-hero-button14 button">Home</a>-->
+        <form method="POST" action="/">
+          <button class='memory-hero-button14 button' type='submit'>Home</button>
+          </form>
       </div>
     </div>
-    <script
-      data-section-id="navbar"
-      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
-    ></script>
+<script>
+      	document.addEventListener('DOMContentLoaded', function () {
+      	
+            const outputContainer = document.getElementById('output-container');
+            const uploadBanner = document.getElementById('upload-banner');
+            const successBanner = document.getElementById('success-banner');
+            
+            const installBtn = document.getElementById('install-dependencies-btn');
+            const installStatus = document.getElementById('install-status');
+            const memimageInfoButton = document.getElementById('mem-image-info-button');
+            
+            const memoryUploadForm = document.getElementById('memory-upload-form');
+            const memimageInfoForm = document.getElementById('mem-image-info-form');
+            const profileForm = document.getElementById('profile-form');
+            
+            function displayUploadBanner() {
+                uploadBanner.style.display = 'block';
+                setTimeout(function() {
+                    uploadBanner.style.display = 'none';
+                }, 50000); // Hide the banner after 5 seconds (you can adjust the duration).
+            }
+            
+            function displaySuccessBanner() {
+                successBanner.style.display = 'block';
+                setTimeout(function() {
+                    successBanner.style.display = 'none';
+                }, 50000); // Hide the banner after 5 seconds (you can adjust the duration).
+            }
+            
+            function displayOutput(output) {
+                outputContainer.innerHTML = output;
+            }
+            
+        memoryUploadForm.addEventListener('submit', async function (event) {
+            event.preventDefault(); // Prevent the default form submission
+            const formData = new FormData(memoryUploadForm);
+
+            try {
+                const response = await fetch('/memory_upload', {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    // File was successfully uploaded
+                    displayUploadBanner();
+                } else {
+                    // Handle errors here
+                    outputContainer.innerText = 'Error: ' + response.statusText;
+                }
+            } catch (error) {
+                outputContainer.innerText = 'Error: ' + error.message;
+            }
+        });
+        
+        
+
+        installBtn.addEventListener('click', async function () {
+            try {
+                const response = await fetch('/install_dependencies', {
+                    method: 'POST'
+                });
+
+                if (response.ok) {
+                    installStatus.textContent = 'Dependencies installed successfully!';
+                } else {
+                    const errorData = await response.json();
+                    installStatus.textContent = 'Error: ' + errorData.message;
+                }
+            } catch (error) {
+                installStatus.textContent = 'Error: ' + error.message;
+            }
+        });
+        
+        memimageInfoForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Make an AJAX request to execute the img_stat function
+                fetch('/mem-image-info', {
+                    method: 'POST',
+                    body: new FormData(memimageInfoForm),
+                })
+                .then(response => response.text()) // Use text() instead of json()
+                .then(data => {
+                    displayOutput(data);
+                })
+                .catch(error => {
+                    outputContainer.innerText = 'Error: ' + error.message;
+                });
+            });
+            
+            
+        profileForm.addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        const profileInput = document.getElementById('profile-input').value;
+
+        // Make an AJAX request to set the profile
+        fetch('/set_profile', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: `profile=${profileInput}`
+        })
+        .then(response => {
+            if (response.ok) {
+                // Show the success banner if profile is set successfully
+                displaySuccessBanner();
+                successBanner.style.display = 'block';
+                // Hide the banner after a few seconds (adjust the duration as needed)
+                setTimeout(function() {
+                    successBanner.style.display = 'none';
+                }, 3000); // Hide the banner after 3 seconds
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+    
+    
+	    
+    });
+    </script>
   </body>
 </html>

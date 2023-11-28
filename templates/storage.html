@@ -172,7 +172,7 @@
                   <div class="storage-container11"></div>
                   <form
                     id="image-info-form"
-                    action="/image_info"
+                    action="/storage-imgstat"
                     method="POST"
                     class="storage-form1"
                   >
@@ -193,7 +193,7 @@
                   </form>
                   <form
                     id="partition-info-form"
-                    action="/partition_info"
+                    action="/storage-mmls"
                     method="POST"
                     class="storage-form2"
                   >
@@ -204,18 +204,19 @@
                       placeholder="placeholder"
                       class="input"
                     />
-                    <a
-                      href="#features-upload-image-info"
+                    <button
+                      type="submit"
                       id="partition-info-button"
                       class="storage-hero-button12 button"
                     >
                       View Disk Partition Info
-                    </a>
+                    </button>
                   </form>
                 </div>
-                <div id="output-container" class="storage-feature-card3">
+                <div class="storage-feature-card3">
                  <!-- <div class="storage-container12"> -->
-                    <h3 class="storage-text07 heading3">Output</h3>
+                    <h3 class="storage-text07 heading3">Output</h3><br>
+                    <div id="output-container"></div>
                  <!-- </div> -->
                 </div>
               </div>
@@ -498,13 +499,13 @@
             </span>
           </footer>
         </div>
-        <a href="index.html" class="storage-hero-button13 button">Home</a>
+        <!-- <a href="index.html" class="storage-hero-button13 button">Home</a> -->
+        <form method="POST" action="/">
+          <button class='storage-hero-button13 button' type='submit'>Home</button>
+          </form>
       </div>
     </div>
-    <script
-      data-section-id="navbar"
-      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
-    >
+    <script>
     
     document.addEventListener('DOMContentLoaded', function () {
     
@@ -512,8 +513,11 @@
     const uploadBanner = document.getElementById('upload-banner');
     
     const imageInfoButton = document.getElementById('image-info-button');
+    const partitionInfoButton = document.getElementById('partition-info-button');
     
+    const fileUploadForm = document.getElementById('file-upload-form');
     const imageInfoForm = document.getElementById('image-info-form');
+    const partitionInfoForm = document.getElementById('partition-info-form');
     
     function displayUploadBanner() {
                 uploadBanner.style.display = 'block';
@@ -523,12 +527,13 @@
             }
             
     function displayOutput(output) {
-                outputContainer.innerHTML = output;
+                    const outputContainer = document.getElementById('output-container');
+    		    outputContainer.innerHTML = output;
             }
             
             
-    const fileUploadForm = document.getElementById('file-upload-form');
-		fileUploadForm.addEventListener('submit', async function (event) {
+
+    fileUploadForm.addEventListener('submit', async function (event) {
 		    event.preventDefault(); // Prevent the default form submission
 		    const formData = new FormData(fileUploadForm);
 
@@ -553,26 +558,28 @@
 		
      imageInfoForm.addEventListener('submit', function (event) {
                 event.preventDefault(); // Prevent the default form submission
+                
 
                 // Make an AJAX request to execute the img_stat function
-                fetch('/image_info', {
+                fetch('/storage-imgstat', {
                     method: 'POST',
                     body: new FormData(imageInfoForm),
                 })
                 .then(response => response.text()) // Use text() instead of json()
                 .then(data => {
                     displayOutput(data);
+                /*    outputContainer.innerHTML = data; */
                 })
                 .catch(error => {
                     outputContainer.innerText = 'Error: ' + error.message;
                 });
             });
 
-            partitionInfoForm.addEventListener('submit', function (event) {
+    partitionInfoForm.addEventListener('submit', function (event) {
                 event.preventDefault(); // Prevent the default form submission
 
                 // Make an AJAX request to execute the mmls function
-                fetch('/partition_info', {
+                fetch('/storage-mmls', {
                     method: 'POST',
                     body: new FormData(partitionInfoForm),
                 })

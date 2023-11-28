@@ -60,16 +60,20 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
     <div>
-      <link href="./mem-cmdline.css" rel="stylesheet" />
-
+       <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='mem-cmdline.css') }}" />
+       
       <div class="mem-cmdline-container">
         <div class="mem-cmdline-header">
-          <a href="index.html" class="mem-cmdline-hero-button1 button">Home</a>
-          <a href="memory.html" class="mem-cmdline-hero-button11 button">
-            Back
-          </a>
+          <!--<a href="index.html" class="mem-cmdline-hero-button1 button">Home</a>-->
+          <form method="POST" action="/">
+          <button class='mem-cmdline-hero-button1 button' type='submit'>Home</button>
+          </form>
+          <!--<a href="memory.html" class="mem-cmdline-hero-button11 button">Back</a>-->
+          <form method="POST" action="/memory_forensics">
+          <button class='mem-cmdline-hero-button11 button' type='submit'>Back</button>
+          </form>
         </div>
         <div class="mem-cmdline-hero">
           <div class="mem-cmdline-container01">

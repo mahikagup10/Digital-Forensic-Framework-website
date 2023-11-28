@@ -7,7 +7,7 @@ app = Flask(__name__)
 mem_address = "" 
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def choose_forensics():
     return render_template('index.html')
     
@@ -15,8 +15,25 @@ def choose_forensics():
 @app.route('/storage_forensics', methods=['GET', 'POST'])
 def storage_forensics():
     return render_template('storage.html')
+    
+@app.route('/storage_upload',methods=['POST'])	
+def upload_file():
+	global fileaddress
+	uploaded_file = request.files['file']
+	if uploaded_file.filename != '':
+		upload_dir = 'Image'
+		os.makedirs(upload_dir, exist_ok=True)
+		file_address = os.path.join(upload_dir,uploaded_file.filename)
+		fileaddress = file_address
+		uploaded_file.save(file_address)
+		with open('file_address.txt','w') as file:
+			file.write(file_address)
+			return 'File uploaded successfully!'
+	else:
+		return 'No file selected'
 
-@app.route('/image_info', methods=['GET', 'POST'])
+
+@app.route('/storage-imgstat', methods=['GET', 'POST'])
 def image_info():
     with open('file_address.txt', 'r') as file:
         storage_address = file.read().strip() 
@@ -37,49 +54,66 @@ def image_info():
     return render_template('storage.html', output=output)
     
 
-@app.route('/partition_info', methods=['POST'])
-def disk_partition_info():
-    global mem_address
+@app.route('/storage-mmls', methods=['GET', 'POST'])
+def partition_info():
     with open('file_address.txt', 'r') as file:
         storage_address = file.read().strip()
-
+    output = ""
+    if request.method == 'POST':
+        action = request.form.get('action')
+        if action == 'mmls':
+            command = ["mmls", storage_address]
     # Logic to retrieve disk partition info
-    try:
-        command = ['mmls', storage_address]
-        subprocess.run(command)
-        output = subprocess.check_output(command, stderr=subprocess.STDOUT, text=True)
-        partition_info_output = output.replace('\n', '<br>')  # Remove <pre> tags
-    except subprocess.CalledProcessError as e:
-        return jsonify(error="An error occurred during mmls execution.")
+            try:
+                output = subprocess.check_output(command, stderr=subprocess.STDOUT, text=True)
+                output = '<pre>' + output.replace('\n', '<br>') + '</pre>'
+                return output
+            except subprocess.CalledProcessError as e:
+                return jsonify(error="An error occurred during mmls execution.")
+    return render_template('storage.html', output=output)
+    
+    
+@app.route('/storage-fls.html')
+def storage_fls():
+	return render_template('storage-fls.html')
+	
+@app.route('/storage-fsstat.html')
+def storage_fsstat():
+	return render_template('storage-fsstat.html')
+	
+@app.route('/storage-ils.html')
+def storage_ils():
+	return render_template('storage-ils.html')
+	
+@app.route('/storage-jpegextract.html')
+def storage_jpegextract():
+	return render_template('storage-jpegextract.html')
+	
+@app.route('/storage-icat.html')
+def storage_icat():
+	return render_template('storage-icat.html')
+	
+@app.route('/storage-istat.html')
+def storage_istat():
+	return render_template('storage-istat.html')
+	
+@app.route('/storage-sorter.html')
+def storage_sorter():
+	return render_template('storage-sorter.html')
+	
+@app.route('/storage-stringsearch.html')
+def storage_stringsearch():
+	return render_template('storage-stringsearch.html')
+	
+@app.route('/storage-tskrecover.html')
+def storage_recover():
+	return render_template('storage-tskrecover.html')    
 
-    return jsonify({'output': partition_info_output})
     
 @app.route('/memory_forensics', methods=['GET', 'POST'])
 def memory_forensics():
     return render_template('memory.html')
     
-@app.route('/mem-printkey.html')
-def mem_printkey():
-    # Code to render mem-printkey.html template or perform actions
-    return render_template('mem-printkey.html')
-
-
-@app.route('/storage_upload',methods=['POST'])	
-def upload_file():
-	global fileaddress
-	uploaded_file = request.files['file']
-	if uploaded_file.filename != '':
-		upload_dir = 'Image'
-		os.makedirs(upload_dir, exist_ok=True)
-		file_address = os.path.join(upload_dir,uploaded_file.filename)
-		fileaddress = file_address
-		uploaded_file.save(file_address)
-		with open('file_address.txt','w') as file:
-			file.write(file_address)
-			return 'File uploaded successfully!'
-	else:
-		return 'No file selected'
-
 @app.route('/install_dependencies', methods=['POST'])
 def install_dependencies():
     try:
@@ -110,12 +144,83 @@ def install_dependencies():
         return jsonify({'message': f'Error during installation: {e}'}), 500
 
 
+@app.route('/memory_upload',methods=['POST'])	
+def upload_dump():
+	global mem_address
+	uploaded_file = request.files['file']
+	if uploaded_file.filename != '':
+		upload_dir = 'Image'
+		os.makedirs(upload_dir, exist_ok=True)
+		mem_address = os.path.join(upload_dir,uploaded_file.filename)
+		#memaddress=mem_address
+		uploaded_file.save(mem_address)
+		with open('mem_address.txt','w') as file:
+			file.write(mem_address)
+			return 'Memory dump uploaded successfully!'
+	else:
+		return 'No file selected'
+
+
+@app.route('/mem-image-info', methods=['POST'])
+def mem_imageinfo():
+    global mem_address
+    with open('mem_address.txt', 'r') as file:
+        mem_address = file.read().strip() 
+    output = ""
+    
+    if request.method == 'POST':
+        action = request.form.get('action')
+        
+        if action == 'memimageinfo':
+            # Logic to handle 'memimageinfo' action
+            command = ["python2", "/opt/volatility/vol.py", "-f", mem_address, "imageinfo"]
+            try:
+                output = subprocess.check_output(command, stderr=subprocess.STDOUT, text=True)
+                # Wrap the output in <pre> tags and replace newlines with <br> tags
+                output = '<pre>' + output.replace('\n', '<br>') + '</pre>'
+                return output
+            except subprocess.CalledProcessError as e:
+                # Handle errors here, for example:
+                return jsonify(error="An error occurred during imageinfo execution.")
+    return render_template('memory.html', output=output)
+
+
     
 @app.route('/set_profile',methods=['POST'])
 def set_profile():
 	global profile
 	profile = request.form['profile']
 	return 'Profile Set Successfully'
+	
+	
+    
+@app.route('/mem-printkey.html')
+def mem_printkey():
+    # Code to render mem-printkey.html template or perform actions
+    return render_template('mem-printkey.html')
+
+@app.route('/mem-psxview.html')
+def mem_psxview():
+	return render_template('mem-psxview.html')
+	
+@app.route('/mem-netscan.html')
+def mem_netscan():
+	return render_template('mem-netscan.html')
+
+@app.route('/mem-cmdline.html')
+def mem_cmdline():
+	return render_template('mem-cmdline.html')
+
+@app.route('/mem-pslist.html')
+def mem_pslist():
+	return render_template('mem-pslist.html')
+
+@app.route('/mem-hashdump-crackpass.html')
+def mem_hashdump_crackpass():
+	return render_template('mem-hashdump-crackpass.html')
+
+
+
 
 @app.route('/memory_tools', methods=['GET', 'POST'])
 def memory_tools():
@@ -230,31 +335,13 @@ def memory_tools():
             except subprocess.CalledProcessError as e:
                 print(e.cmd, e.output)
                 return jsonify(error="An error occurred during cmdline execution.")                
-           
-
-                
                
-    
     # Return the appropriate response or render the necessary template
     return render_template('memory.html', output=output)  # Rendering the memory tools page
     
     
     
-@app.route('/memory_upload',methods=['POST'])	
-def upload_dump():
-	global mem_address
-	uploaded_file = request.files['file']
-	if uploaded_file.filename != '':
-		upload_dir = 'Image'
-		os.makedirs(upload_dir, exist_ok=True)
-		mem_address = os.path.join(upload_dir,uploaded_file.filename)
-		#memaddress=mem_address
-		uploaded_file.save(mem_address)
-		with open('mem_address.txt','w') as file:
-			file.write(mem_address)
-			return 'Memory dump uploaded successfully!'
-	else:
-		return 'No file selected'
+
 
 
 @app.route('/execute', methods=['GET','POST'])
