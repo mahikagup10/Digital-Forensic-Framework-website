@@ -6,9 +6,11 @@ app = Flask(__name__)
 
 mem_address = "" 
 
-@app.route('/')
+
+@app.route('/index')
 def choose_forensics():
     return render_template('index.html')
+    
 
 @app.route('/storage_forensics', methods=['GET', 'POST'])
 def storage_forensics():
@@ -16,47 +18,158 @@ def storage_forensics():
         #return redirect(url_for('storage_forensics'))
         return render_template('storage.html')
     return render_template('storage.html')
+
+@app.route('/image_info', methods=['GET', 'POST'])
+def image_info():
+    with open('file_address.txt', 'r') as file:
+        storage_address = file.read().strip() 
+    output = ""
+    
+    if request.method == 'POST':
+        action = request.form.get('action')
+        
+        if action == 'img_stat':
+            command = ["img_stat", storage_address]
+            #subprocess.run(command)
+            try:
+                # Execute img_stat command
+                output = subprocess.check_output(command, stderr=subprocess.STDOUT, text=True)
+                # Wrap the output in <pre> tags and replace newlines with <br> tags
+                output = '<pre>' + output.replace('\n', '<br>') + '</pre>'
+                return  output
+            except subprocess.CalledProcessError as e:
+                return jsonify(error="An error occurred during img_stat execution.")
+    return render_template('storage.html', output=output)
+    
+@app.route('/partition_info', methods=['POST'])
+def disk_partition_info():
+    #global mem_address
+    with open('file_address.txt', 'r') as file:
+        storage_address = file.read().strip()
+    output = ""
+    
+    if request.method == 'POST':
+        action = request.form.get('action')
+        
+        if action == 'mmls':
+            command = ["mmls", storage_address]
+            subprocess.run(command)
+            try:
+                # Execute img_stat command
+                output = subprocess.check_output(command, stderr=subprocess.STDOUT, text=True)
+                # Wrap the output in <pre> tags and replace newlines with <br> tags
+                output = '<pre>' + output.replace('\n', '<br>') + '</pre>'
+            except subprocess.CalledProcessError as e:
+                return jsonify(error="An error occurred during mmls execution.")
+    return output
+    
+@app.route('/storage_fls',methods=['POST'])
+def fls():
+    with open('file_address.txt', 'r') as file:
+        storage_address = file.read().strip()   
+    output = ""
+    
+    if request.method == 'POST':
+        action = request.form.get('action')
+        
+        if action == 'fls':
+            offset = request.form['offset']
+            command = ['fls',"-o",offset,"-r",storage_address]
+            subprocess.run(command)
+            try:
+                # Replace '/path/to/your/image.dd' with the actual path to your forensic image file
+                output = subprocess.check_output(command, stderr=subprocess.STDOUT, text=True)
+                # Wrap the output in <pre> tags and replace newlines with <br> tags
+                output = '<pre>' + output.replace('\n', '<br>') + '</pre>'
+            except subprocess.CalledProcessError as e:
+                return jsonify(error="An error occurred during fls execution.")
+    return output
+    
+@app.route('/mem-image-info',methods=['POST'])
+def mem_imageinfo():
+    global mem_address
+    with open('mem_address.txt', 'r') as file:
+        mem_address = file.read().strip() 
+    output = ""
+
+    if request.method == 'POST':
+        action = request.form.get('action')
+
+        if action == 'memimageinfo':
+            # Logic to handle 'memimageinfo' action
+            command = ["python2", "/opt/volatility/volatility/vol.py", "-f", mem_address, "imageinfo"]
+            try:
+                output = subprocess.check_output(command, stderr=subprocess.STDOUT, text=True)
+                # Wrap the output in <pre> tags and replace newlines with <br> tags
+                output = '<pre>' + output.replace('\n', '<br>') + '</pre>'
+                return output
+            except subprocess.CalledProcessError as e:
+                # Handle errors here, for example:
+                return jsonify(error="An error occurred during imageinfo execution.")
+    return output
     
 @app.route('/memory_forensics', methods=['GET', 'POST'])
 def memory_forensics():
     return render_template('memory.html')
-
-
+    
 @app.route('/storage-fls.html')
 def storage_fls():
-	return render_template('storage-fls.html')
+    return render_template('storage-fls.html')
 	
 @app.route('/storage-fsstat.html')
 def storage_fsstat():
-	return render_template('storage-fsstat.html')
+    return render_template('storage-fsstat.html')
 	
 @app.route('/storage-ils.html')
 def storage_ils():
-	return render_template('storage-ils.html')
+    return render_template('storage-ils.html')
 	
 @app.route('/storage-jpegextract.html')
 def storage_jpegextract():
-	return render_template('storage-jpegextract.html')
+    return render_template('storage-jpegextract.html')
 	
 @app.route('/storage-icat.html')
 def storage_icat():
-	return render_template('storage-icat.html')
+    return render_template('storage-icat.html')
 	
 @app.route('/storage-istat.html')
 def storage_istat():
-	return render_template('storage-istat.html')
+    return render_template('storage-istat.html')
 	
 @app.route('/storage-sorter.html')
 def storage_sorter():
-	return render_template('storage-sorter.html')
+    return render_template('storage-sorter.html')
 	
 @app.route('/storage-stringsearch.html')
 def storage_stringsearch():
-	return render_template('storage-stringsearch.html')
+    return render_template('storage-stringsearch.html')
 	
 @app.route('/storage-tskrecover.html')
 def storage_recover():
-	return render_template('storage-tskrecover.html')
+    return render_template('storage-tskrecover.html')
+    
+@app.route('/mem-printkey.html')
+def mem_printkey():
+    # Code to render mem-printkey.html template or perform actions
+    return render_template('mem-printkey.html')
+    
+@app.route('/mem-psxview.html')
+def mem_psxview():
+    return render_template('mem-psxview.html')
+	
+@app.route('/mem-netscan.html')
+def mem_netscan():
+    return render_template('mem-netscan.html')
+@app.route('/mem-cmdline.html')
+def mem_cmdline():
+    return render_template('mem-cmdline.html')
+@app.route('/mem-pslist.html')
+def mem_pslist():
+    return render_template('mem-pslist.html')
+@app.route('/mem-hashdump-crackpass.html')
+def mem_hashdump_crackpass():
+    return render_template('mem-hashdump-crackpass.html')
+
 
 @app.route('/storage_upload',methods=['POST'])	
 def upload_file():
@@ -124,17 +237,17 @@ def memory_tools():
         # For example:
         action = request.form.get('action')
 
-        if action == 'memimageinfo':
-            # Logic to handle 'memimageinfo' action
-            command = ["python2", "/opt/volatility/volatility/vol.py", "-f", mem_address, "imageinfo"]
-            try:
-                output = subprocess.check_output(command, stderr=subprocess.STDOUT, text=True)
-                # Wrap the output in <pre> tags and replace newlines with <br> tags
-                output = '<pre>' + output.replace('\n', '<br>') + '</pre>'
-                return output
-            except subprocess.CalledProcessError as e:
-                # Handle errors here, for example:
-                return jsonify(error="An error occurred during imageinfo execution.")
+        #if action == 'memimageinfo':
+        #    # Logic to handle 'memimageinfo' action
+        #    command = ["python2", "/opt/volatility/volatility/vol.py", "-f", mem_address, "imageinfo"]
+        #    try:
+        #        output = subprocess.check_output(command, stderr=subprocess.STDOUT, text=True)
+        #        # Wrap the output in <pre> tags and replace newlines with <br> tags
+        #        output = '<pre>' + output.replace('\n', '<br>') + '</pre>'
+        #        return output
+        #    except subprocess.CalledProcessError as e:
+        #        # Handle errors here, for example:
+        #        return jsonify(error="An error occurred during imageinfo execution.")
 
         if action == 'printkey':
             # Logic to handle 'printkey' action (displaying registry keys)
@@ -230,7 +343,7 @@ def memory_tools():
                
     
     # Return the appropriate response or render the necessary template
-    return render_template('memory_tools.html', output=output)  # Rendering the memory tools page
+    return render_template('memory.html', output=output)  # Rendering the memory tools page
     
     
     
@@ -251,9 +364,8 @@ def upload_dump():
 		return 'No file selected'
 
 
-@app.route('/execute', methods=['GET','POST'])
+@app.route('/storage_forensics', methods=['GET','POST'])
 def execute():
-    global mem_address
     with open('file_address.txt', 'r') as file:
         storage_address = file.read().strip() 
     output = ""
@@ -263,37 +375,6 @@ def execute():
         # You can use request.form to access form data
         # For example:
         action = request.form.get('action')
-	
-    if action == 'img_stat':
-        # Compile and execute img_stat tool
-        command = ["img_stat",storage_address]
-        # Compile the C program if not already compiled
-        subprocess.run(command)
-
-        # Replace '/path/to/your/image.dd' with the actual path to your forensic image file
-        try:
-            output = subprocess.check_output(command, stderr=subprocess.STDOUT, text=True)
-            # Wrap the output in <pre> tags and replace newlines with <br> tags
-            output = '<pre>' + output.replace('\n', '<br>') + '</pre>'
-        except subprocess.CalledProcessError as e:
-            # Handle errors here, for example:
-            return jsonify(error="An error occurred during img_stat execution.")
-
-    if action == 'mmls':
-        # Compile and execute mmls tool
-        command = ['mmls',storage_address]
-        # Compile the C program if not already compiled
-        subprocess.run(command)
-
-        # Replace '/path/to/your/image.dd' with the actual path to your forensic image file
-        try:
-            #output = subprocess.check_output(['./mmls', '/home/mahika/Downloads/CapstoneFramework/Mantooth_raw.dd.raw'], stderr=subprocess.STDOUT, text=True)
-            output = subprocess.check_output(command, stderr=subprocess.STDOUT, text=True)
-            # Wrap the output in <pre> tags and replace newlines with <br> tags
-            output = '<pre>' + output.replace('\n', '<br>') + '</pre>'
-        except subprocess.CalledProcessError as e:
-            # Handle errors here, for example:
-            return jsonify(error="An error occurred during mmls execution.")
             
     if action == 'fls':
         # Get the offset from the form data
@@ -496,8 +577,6 @@ def execute():
 
     #print(type(output))
     return output
-
-        
 
 if __name__ == '__main__':
     app.run(debug=True)
