@@ -601,7 +601,7 @@
   height: 56px;
   position: absolute;
   align-self: center;
-  text-align: left;
+  text-align: center;
   font-family: "Raleway";
   font-weight: 600;
   line-height: 28px;
@@ -646,13 +646,14 @@
   top: 27px;
   left: 15px;
   right: 15px;
-  width: 284px;
+  width: 296px;
   height: 58px;
   position: absolute;
   align-self: flex-end;
   font-family: "Raleway";
   font-weight: 600;
   line-height: 28px;
+  text-align:center;
 }
 .storage-text19 {
   top: 119px;
@@ -716,6 +717,7 @@
   font-family: "Raleway";
   font-weight: 600;
   line-height: 28px;
+  text-align:center;
 }
 .storage-container18 {
   gap: var(--dl-space-space-unit);
@@ -761,7 +763,7 @@
   height: 50px;
   margin: auto;
   position: absolute;
-  text-align: left;
+  text-align: center;
   font-family: "Raleway";
   font-weight: 600;
   line-height: 28px;
@@ -810,7 +812,7 @@
   height: 50px;
   margin: auto;
   position: absolute;
-  text-align: left;
+  text-align: center;
   font-family: "Raleway";
   font-weight: 600;
   line-height: 28px;
@@ -860,6 +862,7 @@
   font-family: "Raleway";
   font-weight: 600;
   line-height: 28px;
+  text-align:center;
 }
 .storage-container21 {
   gap: var(--dl-space-space-unit);
@@ -896,10 +899,10 @@
   line-height: 28px;
 }
 .storage-text43 {
-  top: 145px;
   color: var(--dl-color-gray-black);
-  right: -437px;
+  right: 14px;
   width: 265px;
+  bottom: 47px;
   height: 109px;
   margin: auto;
   z-index: 100;
@@ -911,6 +914,7 @@
 }
 .storage-text44 {
   font-size: 16px;
+  
 }
 .storage-text46 {
   top: 27px;
@@ -921,6 +925,7 @@
   font-family: "Raleway";
   font-weight: 600;
   line-height: 28px;
+  text-align:center;
 }
 .storage-container22 {
   gap: var(--dl-space-space-unit);
@@ -968,6 +973,7 @@
   font-family: "Raleway";
   font-weight: 600;
   line-height: 28px;
+  text-align:center;
 }
 .storage-container23 {
   gap: var(--dl-space-space-unit);
@@ -998,6 +1004,7 @@
   font-family: "Raleway";
   font-weight: 600;
   line-height: 28px;
+  text-align:center;
 }
 .storage-faq {
   flex: 0 0 auto;

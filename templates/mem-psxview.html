@@ -122,7 +122,7 @@
                   </div>
                   <form
                     id="psxview-form"
-                    action="/execute"
+                    action="/mem-psxview.html"
                     method="POST"
                     class="mem-psxview-form"
                   >
@@ -299,9 +299,39 @@
         </div>
       </div>
     </div>
-    <script
-      data-section-id="navbar"
-      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
-    ></script>
+    <script>
+    
+    document.addEventListener('DOMContentLoaded', function () {
+      	
+            const outputContainer = document.getElementById('output-container');
+            const psxviewButton = document.getElementById('psxview-button');
+            
+            const psxviewForm = document.getElementById('psxview-form');
+            
+            function displayOutput(output) {
+                outputContainer.innerHTML = output;
+            }
+            
+	    psxviewForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Make an AJAX request to execute the img_stat function
+                fetch('/mem-psxview.html', {
+                    method: 'POST',
+                    body: new FormData(psxviewForm),
+                })
+                .then(response => response.text()) // Use text() instead of json()
+                .then(data => {
+                    displayOutput(data);
+                })
+                .catch(error => {
+                    outputContainer.innerText = 'Error: ' + error.message;
+                });
+            });
+    
+	    
+    });
+    
+    </script>
   </body>
 </html>

@@ -60,13 +60,15 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
-    <div>
-      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='storage-fls.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"> 
+    <div> 
+    	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='storage-fls.css') }}">
 
       <div class="storage-fls-container">
         <div class="storage-fls-header">
-          <a href="index.html" class="storage-fls-hero-button1 button">Home</a>
+                    <form method="POST" action="/">
+          <button class="storage-fls-hero-button1 button" type='submit'>Home</button>
+          </form>
         </div>
         <div class="storage-fls-hero">
           <div class="storage-fls-container01">
@@ -126,7 +128,7 @@
                   </div>
                   <form
                     id="fls-form"
-                    action="/execute"
+                    action="/storage-fls.html"
                     method="POST"
                     class="storage-fls-form"
                   >
@@ -162,9 +164,9 @@
                     </button>
                   </form>
                 </div>
-                <div id="output-container" class="storage-fls-feature-card1">
+                <div class="storage-fls-feature-card1">
                   <div class="storage-fls-container06">
-                    <h3 class="storage-fls-text14 heading3">Output</h3>
+                    <h3 class="storage-fls-text14 heading3"  style="padding-bottom:20px">Output</h3><div id="output-container" ></div>
                   </div>
                 </div>
               </div>
@@ -311,7 +313,7 @@
             </span>
           </footer>
         </div>
-        <a href="storage.html" class="storage-fls-hero-button12 button">
+        <a href="/storage_forensics" class="storage-fls-hero-button12 button">
           <span class="storage-fls-text42">
             <span class="storage-fls-text43">Back</span>
             <br />
@@ -320,9 +322,35 @@
         </a>
       </div>
     </div>
-    <script
-      data-section-id="navbar"
-      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
-    ></script>
+    <script>
+      	document.addEventListener('DOMContentLoaded', function () {
+      	
+      	    const flsButton = document.getElementById('fls-button');
+      	    const outputContainer = document.getElementById('output-container');
+      	    const flsForm = document.getElementById('fls-form');
+      	    
+      	    function displayOutput(output) {
+                    const outputContainer = document.getElementById('output-container');
+    		    outputContainer.innerHTML = output;
+            }
+      	    
+      	    flsForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Make an AJAX request to execute the mmls function
+                fetch('/storage-fls.html', {
+                    method: 'POST',
+                    body: new FormData(flsForm),
+                })
+                .then(response => response.text()) // Use text() instead of json()
+                .then(data => {
+                    displayOutput(data);
+                })
+                .catch(error => {
+                    outputContainer.innerText = 'Error: ' + error.message;
+                });
+            });
+        });
+    </script>
   </body>
 </html>

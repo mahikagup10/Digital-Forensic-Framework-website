@@ -124,7 +124,7 @@
                   </div>
                   <form
                     id="netscan-form"
-                    action="/execute"
+                    action="/mem-netscan.html"
                     method="POST"
                     class="mem-netscan-form"
                   >
@@ -298,9 +298,39 @@
         </div>
       </div>
     </div>
-    <script
-      data-section-id="navbar"
-      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
-    ></script>
+    <script>
+    
+     document.addEventListener('DOMContentLoaded', function () {
+      	
+            const outputContainer = document.getElementById('output-container');
+            const netscanButton = document.getElementById('netscan-button');
+            
+            const netscanForm = document.getElementById('netscan-form');
+            
+            function displayOutput(output) {
+                outputContainer.innerHTML = output;
+            }
+            
+	    netscanForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Make an AJAX request to execute the img_stat function
+                fetch('/mem-netscan.html', {
+                    method: 'POST',
+                    body: new FormData(netscanForm),
+                })
+                .then(response => response.text()) // Use text() instead of json()
+                .then(data => {
+                    displayOutput(data);
+                })
+                .catch(error => {
+                    outputContainer.innerText = 'Error: ' + error.message;
+                });
+            });
+    
+	    
+    });
+    
+    </script>
   </body>
 </html>

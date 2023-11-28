@@ -60,18 +60,18 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
-    <div>
-      <link href="{{ url_for('static', filename='storage-fsstat.css') }}" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"> 
+    <div> 
+    	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='storage-fsstat.css') }}">
 
       <div class="storage-fsstat-container">
         <div class="storage-fsstat-header">
-          <a href="storage.html" class="storage-fsstat-hero-button1 button">
+                    <a href="/storage_forensics" class="storage-fsstat-hero-button1 button">
             Back
           </a>
-          <a href="index.html" class="storage-fsstat-hero-button11 button">
-            Home
-          </a>
+          <form method="POST" action="/">
+          <button class="storage-fsstat-hero-button11 button" type='submit'>Home</button>
+          </form>
         </div>
         <div class="storage-fsstat-hero">
           <div class="storage-fsstat-container01">
@@ -131,7 +131,7 @@
                   </h3>
                   <form
                     id="fsstat-form"
-                    action="/execute"
+                    action="/storage-fsstat.html"
                     method="POST"
                     class="storage-fsstat-form"
                   >
@@ -167,9 +167,9 @@
                     </button>
                   </form>
                 </div>
-                <div id="output-container" class="storage-fsstat-feature-card1">
+                <div class="storage-fsstat-feature-card1">
                   <div class="storage-fsstat-container06">
-                    <h3 class="storage-fsstat-text14 heading3">Output</h3>
+                    <h3 class="storage-fsstat-text14 heading3">Output</h3><div id="output-container"></div>
                   </div>
                 </div>
               </div>
@@ -324,9 +324,34 @@
         </div>
       </div>
     </div>
-    <script
-      data-section-id="navbar"
-      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
-    ></script>
+    <script>
+    	document.addEventListener('DOMContentLoaded', function () {
+
+    	    const fsstatButton = document.getElementById('fsstat-button');
+    	    const outputContainer = document.getElementById('output-container');
+    	    const fsstatForm = document.getElementById('fsstat-form');
+
+    	    function displayOutput(output) {
+                outputContainer.innerHTML = output;
+            }
+
+    	    fsstatForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Make an AJAX request to execute the mmls function
+                fetch('/storage-fsstat.html', {
+                    method: 'POST',
+                    body: new FormData(fsstatForm),
+                })
+                .then(response => response.text()) // Use text() instead of json()
+                .then(data => {
+                    displayOutput(data);
+                })
+                .catch(error => {
+                    outputContainer.innerText = 'Error: ' + error.message;
+                });
+            });
+        });
+    </script>
   </body>
 </html>

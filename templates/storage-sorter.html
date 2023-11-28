@@ -60,17 +60,16 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
-    <div>
-      <link href="{{ url_for('static', filename='storage-sorter.css') }}" rel="stylesheet" />
-
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"> 
+    <div> 
+    	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='storage-sorter.css') }}">
 
       <div class="storage-sorter-container">
         <div class="storage-sorter-header">
-          <a href="index.html" class="storage-sorter-hero-button1 button">
-            Home
-          </a>
-          <a href="storage.html" class="storage-sorter-hero-button11 button">
+                    <form method="POST" action="/">
+          <button class="storage-sorter-hero-button1 button" type='submit'>Home</button>
+          </form>
+          <a href="/storage_forensics" class="storage-sorter-hero-button11 button">
             <span>
               <span class="storage-sorter-text01">Back</span>
               <br />
@@ -147,7 +146,7 @@
                   </div>
                   <form
                     id="sorter-form"
-                    action="/execute"
+                    action="/storage-sorter.html"
                     method="POST"
                     class="storage-sorter-form"
                   >
@@ -183,9 +182,9 @@
                     </button>
                   </form>
                 </div>
-                <div id="output-container" class="storage-sorter-feature-card1">
+                <div class="storage-sorter-feature-card1">
                   <div class="storage-sorter-container06">
-                    <h3 class="storage-sorter-text20 heading3">Output</h3>
+                    <h3 class="storage-sorter-text20 heading3">Output</h3><div id="output-container"></div>
                   </div>
                 </div>
               </div>
@@ -340,9 +339,35 @@
         </div>
       </div>
     </div>
-    <script
-      data-section-id="navbar"
-      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
-    ></script>
+    <script>
+      	document.addEventListener('DOMContentLoaded', function () {
+
+      	    const sorterButton = document.getElementById('sorter-button');
+      	    const outputContainer = document.getElementById('output-container');
+      	    const sorterForm = document.getElementById('sorter-form');
+
+      	    function displayOutput(output) {
+                    const outputContainer = document.getElementById('output-container');
+    		    outputContainer.innerHTML = output;
+            }
+
+      	    sorterForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Make an AJAX request to execute the sorter function
+                fetch('/storage-sorter.html', {
+                    method: 'POST',
+                    body: new FormData(sorterForm),
+                })
+                .then(response => response.text()) // Use text() instead of json()
+                .then(data => {
+                    displayOutput(data);
+                })
+                .catch(error => {
+                    outputContainer.innerText = 'Error: ' + error.message;
+                });
+            });
+        });
+    </script>
   </body>
 </html>

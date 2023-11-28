@@ -627,7 +627,7 @@
   left: 18px;
   color: var(--dl-color-gray-black);
   width: 265px;
-  bottom: -396px;
+  bottom: 50px;
   height: 109px;
   margin: auto;
   z-index: 100;
@@ -692,7 +692,7 @@
   left: 19px;
   color: var(--dl-color-gray-black);
   width: 265px;
-  bottom: -394px;
+  bottom: 50px;
   height: 109px;
   margin: auto;
   z-index: 100;
@@ -707,9 +707,9 @@
 }
 .memory-text31 {
   color: var(--dl-color-gray-black);
-  right: -434px;
+  right: 10px;
   width: 265px;
-  bottom: -388px;
+  bottom: 50px;
   height: 109px;
   margin: auto;
   z-index: 100;
@@ -725,7 +725,7 @@
 .memory-text34 {
   top: 119px;
   color: var(--dl-color-gray-black);
-  right: -434px;
+  right: 15px;
   width: 265px;
   height: 109px;
   margin: auto;
