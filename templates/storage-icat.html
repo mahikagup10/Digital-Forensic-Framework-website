@@ -60,9 +60,9 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
     <div>
-      <link href="./storage-icat.css" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='storage-icat.css') }}" rel="stylesheet" />
 
       <div class="storage-icat-container">
         <div class="storage-icat-header">

@@ -60,9 +60,9 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
     <div>
-      <link href="./storage-stringsearch.css" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='storage-stringsearch.css') }}" rel="stylesheet" />
 
       <div class="storage-stringsearch-container">
         <div class="storage-stringsearch-header">

@@ -60,10 +60,10 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
     <div>
-      <link href="./storage-jpegextract.css" rel="stylesheet" />
-
+      <link href="{{ url_for('static', filename='storage-jpegextract.css') }}" rel="stylesheet" />
+      
       <div class="storage-jpegextract-container">
         <div class="storage-jpegextract-header">
           <a href="index.html" class="storage-jpegextract-hero-button1 button">

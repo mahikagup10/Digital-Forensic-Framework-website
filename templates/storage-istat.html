@@ -60,9 +60,9 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
     <div>
-      <link href="./storage-istat.css" rel="stylesheet" />
+      <link  rel="stylesheet" href="{{ url_for('static', filename='storage-isstat.css') }}"/>
 
       <div class="storage-istat-container">
         <div class="storage-istat-header">

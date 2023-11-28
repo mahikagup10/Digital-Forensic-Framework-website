@@ -60,9 +60,9 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
     <div>
-      <link href="./storage-tskrecover.css" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='storage-tskrecover.css') }}" rel="stylesheet" />
 
       <div class="storage-tskrecover-container">
         <div class="storage-tskrecover-header">

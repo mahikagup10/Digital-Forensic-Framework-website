@@ -60,9 +60,10 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
     <div>
-      <link href="./storage-sorter.css" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='storage-sorter.css') }}" rel="stylesheet" />
+
 
       <div class="storage-sorter-container">
         <div class="storage-sorter-header">
