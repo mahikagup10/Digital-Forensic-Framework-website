@@ -60,13 +60,18 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
     <div>
       <link href="{{ url_for('static', filename='storage-icat.css') }}" rel="stylesheet" />
 
       <div class="storage-icat-container">
         <div class="storage-icat-header">
-          <a href="index" class="storage-icat-hero-button1 button">Home</a>
+          <a href="/storage_forensics" class="storage-icat-hero-button1 button">
+            Back
+          </a>
+          <form method="POST" action="/">
+          <button class="storage-icat-hero-button11 button" type='submit'>Home</button>
+          </form>
         </div>
         <div class="storage-icat-hero">
           <div class="storage-icat-container01">
@@ -138,7 +143,7 @@
                   </div>
                   <form
                     id="icat-form"
-                    action="/execute"
+                    action="/strg-icat"
                     method="POST"
                     class="storage-icat-form"
                   >
@@ -177,7 +182,7 @@
                     <button
                       id="icat-button"
                       type="submit"
-                      class="storage-icat-hero-button11 button"
+                      class="storage-icat-hero-button12 button"
                     >
                       <span class="storage-icat-text15">
                         <span>View File Contents</span>
@@ -186,9 +191,10 @@
                     </button>
                   </form>
                 </div>
-                <div id="output-container" class="storage-icat-feature-card1">
+                <div class="storage-icat-feature-card1">
                   <div class="storage-icat-container06">
                     <h3 class="storage-icat-text18 heading3">Output</h3>
+                    <div id="output-container"></div>
                   </div>
                 </div>
               </div>
@@ -337,9 +343,35 @@
         </div>
       </div>
     </div>
-    <script
-      data-section-id="navbar"
-      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
-    ></script>
+    <script>
+      	document.addEventListener('DOMContentLoaded', function () {
+      	
+      	    const icatButton = document.getElementById('icat-button');
+      	    const outputContainer = document.getElementById('output-container');
+      	    const icatForm = document.getElementById('icat-form');
+      	    
+      	    function displayOutput(output) {
+                    const outputContainer = document.getElementById('output-container');
+    		    outputContainer.innerHTML = output;
+            }
+      	    
+      	    icatForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Make an AJAX request to execute the icat function
+                fetch('/strg-icat', {
+                    method: 'POST',
+                    body: new FormData(icatForm),
+                })
+                .then(response => response.text()) // Use text() instead of json()
+                .then(data => {
+                    displayOutput(data);
+                })
+                .catch(error => {
+                    outputContainer.innerText = 'Error: ' + error.message;
+                });
+            });
+        });
+    </script>
   </body>
 </html>

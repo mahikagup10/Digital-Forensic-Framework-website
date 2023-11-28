@@ -60,14 +60,20 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
     <div>
       <link href="{{ url_for('static', filename='storage-stringsearch.css') }}" rel="stylesheet" />
 
       <div class="storage-stringsearch-container">
         <div class="storage-stringsearch-header">
-          <a href="index" class="storage-stringsearch-hero-button1 button">
-            Home
+          <form method="POST" action="/">
+          <button class="storage-stringsearch-hero-button1 button" type='submit'>Home</button>
+          </form>
+          <a
+            href="/storage_forensics"
+            class="storage-stringsearch-hero-button11 button"
+          >
+            Back
           </a>
         </div>
         <div class="storage-stringsearch-hero">
@@ -133,15 +139,15 @@
                   </div>
                   <form
                     id="stringsearch-form"
-                    action="/execute"
+                    action="/strg-stringsearch"
                     method="POST"
                     class="storage-stringsearch-form"
                   >
                     <input
                       type="hidden"
-                      placeholder="placeholder"
                       name="action"
                       value="stringsearch"
+                      placeholder="placeholder"
                       class="input"
                     />
                     <label
@@ -154,10 +160,10 @@
                     </label>
                     <input
                       type="text"
-                      placeholder="Enter Offset"
                       id="offset"
                       name="offset"
                       required=""
+                      placeholder="Enter Offset"
                       class="storage-stringsearch-textinput1 input"
                     />
                     <label
@@ -169,16 +175,16 @@
                     </label>
                     <input
                       type="text"
-                      placeholder="Enter String"
                       id="searchString"
                       name="searchString"
                       required=""
+                      placeholder="Enter String"
                       class="storage-stringsearch-textinput2 input"
                     />
                     <button
                       id="stringsearch-button"
                       type="submit"
-                      class="storage-stringsearch-hero-button11 button"
+                      class="storage-stringsearch-hero-button12 button"
                     >
                       <span class="storage-stringsearch-text15">
                         <span>Search&nbsp;</span>
@@ -188,12 +194,10 @@
                     </button>
                   </form>
                 </div>
-                <div
-                  id="output-container"
-                  class="storage-stringsearch-feature-card1"
-                >
+                <div class="storage-stringsearch-feature-card1">
                   <div class="storage-stringsearch-container06">
                     <h3 class="storage-stringsearch-text19 heading3">Output</h3>
+                    <div id="output-container"></div>
                   </div>
                 </div>
               </div>
@@ -350,9 +354,35 @@
         </div>
       </div>
     </div>
-    <script
-      data-section-id="navbar"
-      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
-    ></script>
+    <script>
+      	document.addEventListener('DOMContentLoaded', function () {
+      	
+      	    const stringsearchButton = document.getElementById('stringsearch-button');
+      	    const outputContainer = document.getElementById('output-container');
+      	    const stringsearchForm = document.getElementById('stringsearch-form');
+      	    
+      	    function displayOutput(output) {
+                    const outputContainer = document.getElementById('output-container');
+    		    outputContainer.innerHTML = output;
+            }
+      	    
+      	    stringsearchForm.addEventListener('submit', function (event) {
+            	event.preventDefault(); // Prevent the default form submission
+
+            	// Make an AJAX request to execute the stringsearch function
+            	fetch('/strg-stringsearch', {
+                	method: 'POST',
+                	body: new FormData(stringsearchForm),
+            	})
+            	.then(response => response.text())
+            	.then(data => {
+                	displayOutput(data);
+            	})
+            	.catch(error => {
+                	outputContainer.innerText = 'Error: ' + error.message;
+           	 });
+            });
+        });
+    </script>
   </body>
 </html>

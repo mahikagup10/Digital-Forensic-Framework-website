@@ -172,7 +172,7 @@
                   <div class="storage-container11"></div>
                   <form
                     id="image-info-form"
-                    action="/image_info"
+                    action="/storage-imgstat"
                     method="POST"
                     class="storage-form1"
                   >
@@ -193,7 +193,7 @@
                   </form>
                   <form
                     id="partition-info-form"
-                    action="/partition_info"
+                    action="/storage-mmls"
                     method="POST"
                     class="storage-form2"
                   >
@@ -339,13 +339,6 @@
                   <h3 class="storage-text42 heading3">
                     Search for a particular string in a partition
                   </h3>
-                  <h3 class="storage-text43 heading3">
-                    <span class="storage-text44">
-                      tsk_recover extracts the unallocated or allocated files
-                      from the disk image to local directory.&nbsp;
-                    </span>
-                    <br />
-                  </h3>
                   <h3 class="storage-text46 heading3">
                     <span>Search for a String</span>
                     <br />
@@ -372,6 +365,13 @@
                 <div class="storage-container23">
                   <h3 class="storage-text55 heading3">
                     <span>Extract all files from Partition</span>
+                    <br />
+                  </h3>
+                  <h3 class="storage-text43 heading3">
+                    <span class="storage-text44">
+                      tsk_recover extracts the unallocated or allocated files
+                      from the disk image to local directory.&nbsp;
+                    </span>
                     <br />
                   </h3>
                 </div>
@@ -499,7 +499,10 @@
             </span>
           </footer>
         </div>
-        <a href="index" class="storage-hero-button13 button">Home</a>
+        <!-- <a href="index.html" class="storage-hero-button13 button">Home</a> -->
+        <form method="POST" action="/">
+          <button class='storage-hero-button13 button' type='submit'>Home</button>
+          </form>
       </div>
     </div>
     <script>
@@ -525,7 +528,7 @@
             
     function displayOutput(output) {
                     const outputContainer = document.getElementById('output-container');
-    outputContainer.innerHTML = output;
+    		    outputContainer.innerHTML = output;
             }
             
             
@@ -558,14 +561,14 @@
                 
 
                 // Make an AJAX request to execute the img_stat function
-                fetch('/image_info', {
+                fetch('/storage-imgstat', {
                     method: 'POST',
                     body: new FormData(imageInfoForm),
                 })
                 .then(response => response.text()) // Use text() instead of json()
                 .then(data => {
                     displayOutput(data);
-                    outputContainer.innerHTML = data;
+                /*    outputContainer.innerHTML = data; */
                 })
                 .catch(error => {
                     outputContainer.innerText = 'Error: ' + error.message;
@@ -576,7 +579,7 @@
                 event.preventDefault(); // Prevent the default form submission
 
                 // Make an AJAX request to execute the mmls function
-                fetch('/partition_info', {
+                fetch('/storage-mmls', {
                     method: 'POST',
                     body: new FormData(partitionInfoForm),
                 })
@@ -588,8 +591,6 @@
                     outputContainer.innerText = 'Error: ' + error.message;
                 });
             });
-		
-    
     });
     </script>
   </body>

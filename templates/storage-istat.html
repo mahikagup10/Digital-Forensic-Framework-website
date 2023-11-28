@@ -60,14 +60,17 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
     <div>
-      <link href="{{ url_for('static', filename='storage-isstat.css') }}" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='storage-istat.css') }}" rel="stylesheet" />
 
       <div class="storage-istat-container">
         <div class="storage-istat-header">
-          <a href="index" class="storage-istat-hero-button1 button">
-            Home
+          <form method="POST" action="/">
+          <button class="storage-istat-hero-button1 button" type='submit'>Home</button>
+          </form>
+          <a href="/storage_forensics" class="storage-istat-hero-button11 button">
+            Back
           </a>
         </div>
         <div class="storage-istat-hero">
@@ -139,7 +142,7 @@
                   </div>
                   <form
                     id="istat-form"
-                    action="/execute"
+                    action="/strg-istat"
                     method="POST"
                     class="storage-istat-form"
                   >
@@ -171,14 +174,14 @@
                       type="text"
                       id="inode"
                       name="inode"
-                      placeholder="Enter inode"
                       required=""
+                      placeholder="Enter inode"
                       class="storage-istat-textinput2 input"
                     />
                     <button
                       id="istat-button"
                       type="submit"
-                      class="storage-istat-hero-button11 button"
+                      class="storage-istat-hero-button12 button"
                     >
                       <span class="storage-istat-text15">
                         <span>View Metadata Structure</span>
@@ -187,9 +190,10 @@
                     </button>
                   </form>
                 </div>
-                <div id="output-container" class="storage-istat-feature-card1">
+                <div class="storage-istat-feature-card1">
                   <div class="storage-istat-container06">
                     <h3 class="storage-istat-text18 heading3">Output</h3>
+                    <div id="output-container"></div>
                   </div>
                 </div>
               </div>
@@ -340,9 +344,35 @@
         </div>
       </div>
     </div>
-    <script
-      data-section-id="navbar"
-      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
-    ></script>
+    <script>
+      	document.addEventListener('DOMContentLoaded', function () {
+      	
+      	    const istatButton = document.getElementById('istat-button');
+      	    const outputContainer = document.getElementById('output-container');
+      	    const istatForm = document.getElementById('istat-form');
+      	    
+      	    function displayOutput(output) {
+                    const outputContainer = document.getElementById('output-container');
+    		    outputContainer.innerHTML = output;
+            }
+      	    
+      	    istatForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Make an AJAX request to execute the istat function
+                fetch('/strg-istat', {
+                    method: 'POST',
+                    body: new FormData(istatForm),
+                })
+                .then(response => response.text()) // Use text() instead of json()
+                .then(data => {
+                    displayOutput(data);
+                })
+                .catch(error => {
+                    outputContainer.innerText = 'Error: ' + error.message;
+                });
+            });
+        });
+    </script>
   </body>
 </html>
