@@ -60,23 +60,17 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
     <div>
-      <link href="./mem-hashdump-crackpass.css" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='mem-hashdump-crackpass.css') }}" rel="stylesheet" />
 
       <div class="mem-hashdump-crackpass-container">
         <div class="mem-hashdump-crackpass-header">
           <a
-            href="index.html"
+            href="index"
             class="mem-hashdump-crackpass-hero-button1 button"
           >
             Home
-          </a>
-          <a
-            href="memory.html"
-            class="mem-hashdump-crackpass-hero-button11 button"
-          >
-            Back
           </a>
         </div>
         <div class="mem-hashdump-crackpass-hero">
@@ -157,7 +151,7 @@
                     <button
                       id="hashdump-button"
                       type="submit"
-                      class="mem-hashdump-crackpass-hero-button12 button"
+                      class="mem-hashdump-crackpass-hero-button11 button"
                     >
                       <span class="mem-hashdump-crackpass-text10">
                         <span>View Password Hashes</span>
@@ -184,7 +178,7 @@
                     <button
                       id="crack-password-button"
                       type="submit"
-                      class="mem-hashdump-crackpass-hero-button13 button"
+                      class="mem-hashdump-crackpass-hero-button12 button"
                     >
                       <span class="mem-hashdump-crackpass-text16">
                         <span>Crack Password</span>

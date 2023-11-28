@@ -60,16 +60,13 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
     <div>
-      <link href="./mem-netscan.css" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='mem-netscan.css') }}" rel="stylesheet" />
 
       <div class="mem-netscan-container">
         <div class="mem-netscan-header">
-          <a href="index.html" class="mem-netscan-hero-button1 button">Home</a>
-          <a href="memory.html" class="mem-netscan-hero-button11 button">
-            Back
-          </a>
+          <a href="index" class="mem-netscan-hero-button1 button">Home</a>
         </div>
         <div class="mem-netscan-hero">
           <div class="mem-netscan-container01">
@@ -134,7 +131,7 @@
                     <button
                       id="netscan-button"
                       type="submit"
-                      class="mem-netscan-hero-button12 button"
+                      class="mem-netscan-hero-button11 button"
                     >
                       <span class="mem-netscan-text03">
                         <span>Display Network Connetions</span>

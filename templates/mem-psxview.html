@@ -60,16 +60,13 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
     <div>
-      <link href="./mem-psxview.css" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='mem-psxview.css') }}" rel="stylesheet" />
 
       <div class="mem-psxview-container">
         <div class="mem-psxview-header">
-          <a href="index.html" class="mem-psxview-hero-button1 button">Home</a>
-          <a href="memory.html" class="mem-psxview-hero-button11 button">
-            Back
-          </a>
+          <a href="index" class="mem-psxview-hero-button1 button">Home</a>
         </div>
         <div class="mem-psxview-hero">
           <div class="mem-psxview-container01">
@@ -125,7 +122,7 @@
                     <button
                       id="psxview-button"
                       type="submit"
-                      class="mem-psxview-hero-button12 button"
+                      class="mem-psxview-hero-button11 button"
                     >
                       <span class="mem-psxview-text03">
                         <span class="mem-psxview-text04">

@@ -60,16 +60,13 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
     <div>
-      <link href="./storage-ils.css" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='storage-ils.css') }}" rel="stylesheet" />
 
       <div class="storage-ils-container">
         <div class="storage-ils-header">
-          <a href="index.html" class="storage-ils-hero-button1 button">Home</a>
-          <a href="storage.html" class="storage-ils-hero-button11 button">
-            Back
-          </a>
+          <a href="index" class="storage-ils-hero-button1 button">Home</a>
         </div>
         <div class="storage-ils-hero">
           <div class="storage-ils-container01">
@@ -161,7 +158,7 @@
                     <button
                       id="ils-button"
                       type="submit"
-                      class="storage-ils-hero-button12 button"
+                      class="storage-ils-hero-button11 button"
                     >
                       <span class="storage-ils-text11">
                         <span>Inode Information</span>

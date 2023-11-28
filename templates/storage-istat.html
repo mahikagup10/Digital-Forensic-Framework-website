@@ -60,17 +60,14 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
     <div>
-      <link href="./storage-istat.css" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='storage-isstat.css') }}" rel="stylesheet" />
 
       <div class="storage-istat-container">
         <div class="storage-istat-header">
-          <a href="index.html" class="storage-istat-hero-button1 button">
+          <a href="index" class="storage-istat-hero-button1 button">
             Home
-          </a>
-          <a href="storage.html" class="storage-istat-hero-button11 button">
-            Back
           </a>
         </div>
         <div class="storage-istat-hero">
@@ -174,14 +171,14 @@
                       type="text"
                       id="inode"
                       name="inode"
-                      required=""
                       placeholder="Enter inode"
+                      required=""
                       class="storage-istat-textinput2 input"
                     />
                     <button
                       id="istat-button"
                       type="submit"
-                      class="storage-istat-hero-button12 button"
+                      class="storage-istat-hero-button11 button"
                     >
                       <span class="storage-istat-text15">
                         <span>View Metadata Structure</span>

@@ -60,16 +60,13 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
     <div>
-      <link href="./storage-fsstat.css" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='storage-fsstat.css') }}" rel="stylesheet" />
 
       <div class="storage-fsstat-container">
         <div class="storage-fsstat-header">
-          <a href="storage.html" class="storage-fsstat-hero-button1 button">
-            Back
-          </a>
-          <a href="index.html" class="storage-fsstat-hero-button11 button">
+          <a href="index" class="storage-fsstat-hero-button1 button">
             Home
           </a>
         </div>
@@ -158,7 +155,7 @@
                     <button
                       id="fsstat-button"
                       type="submit"
-                      class="storage-fsstat-hero-button12 button"
+                      class="storage-fsstat-hero-button11 button"
                     >
                       <span class="storage-fsstat-text11">
                         <span>File System Information</span>

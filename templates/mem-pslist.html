@@ -57,14 +57,13 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
     <div>
-      <link href="./mem-pslist.css" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='mem-pslist.css') }}" rel="stylesheet" />
 
       <div class="mem-pslist-container">
         <div class="mem-pslist-header">
-          <a href="index.html" class="mem-pslist-hero-button1 button">Home</a>
-          <a href="memory.html" class="mem-pslist-hero-button11 button">Back</a>
+          <a href="index" class="mem-pslist-hero-button1 button">Home</a>
         </div>
         <div class="mem-pslist-hero">
           <div class="mem-pslist-container01">
@@ -122,7 +121,7 @@
                     <button
                       id="pslist-button"
                       type="submit"
-                      class="mem-pslist-hero-button12 button"
+                      class="mem-pslist-hero-button11 button"
                     >
                       <span class="mem-pslist-text03">
                         <span>View Running Processes</span>

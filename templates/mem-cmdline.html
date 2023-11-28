@@ -60,16 +60,13 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
     <div>
-      <link href="./mem-cmdline.css" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='mem-cmdline.css') }}" rel="stylesheet" />
 
       <div class="mem-cmdline-container">
         <div class="mem-cmdline-header">
-          <a href="index.html" class="mem-cmdline-hero-button1 button">Home</a>
-          <a href="memory.html" class="mem-cmdline-hero-button11 button">
-            Back
-          </a>
+          <a href="index" class="mem-cmdline-hero-button1 button">Home</a>
         </div>
         <div class="mem-cmdline-hero">
           <div class="mem-cmdline-container01">
@@ -132,7 +129,7 @@
                     <button
                       id="cmdline-button"
                       type="submit"
-                      class="mem-cmdline-hero-button12 button"
+                      class="mem-cmdline-hero-button11 button"
                     >
                       <span class="mem-cmdline-text07">
                         <span class="mem-cmdline-text08">

@@ -60,18 +60,13 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
     <div>
-      <link href="./storage-icat.css" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='storage-icat.css') }}" rel="stylesheet" />
 
       <div class="storage-icat-container">
         <div class="storage-icat-header">
-          <a href="storage.html" class="storage-icat-hero-button1 button">
-            Back
-          </a>
-          <a href="index.html" class="storage-icat-hero-button11 button">
-            Home
-          </a>
+          <a href="index" class="storage-icat-hero-button1 button">Home</a>
         </div>
         <div class="storage-icat-hero">
           <div class="storage-icat-container01">
@@ -182,7 +177,7 @@
                     <button
                       id="icat-button"
                       type="submit"
-                      class="storage-icat-hero-button12 button"
+                      class="storage-icat-hero-button11 button"
                     >
                       <span class="storage-icat-text15">
                         <span>View File Contents</span>

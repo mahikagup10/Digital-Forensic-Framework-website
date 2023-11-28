@@ -60,16 +60,13 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
     <div>
-      <link href="./mem-printkey.css" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='mem-printkey.css') }}" rel="stylesheet" />
 
       <div class="mem-printkey-container">
         <div class="mem-printkey-header">
-          <a href="index.html" class="mem-printkey-hero-button1 button">Home</a>
-          <a href="memory.html" class="mem-printkey-hero-button11 button">
-            Back
-          </a>
+          <a href="index" class="mem-printkey-hero-button1 button">Home</a>
         </div>
         <div class="mem-printkey-hero">
           <div class="mem-printkey-container01">
@@ -127,7 +124,7 @@
                     <button
                       id="print-keys-button"
                       type="submit"
-                      class="mem-printkey-hero-button12 button"
+                      class="mem-printkey-hero-button11 button"
                     >
                       <span class="mem-printkey-text05">
                         <span>Display Registry Keys</span>

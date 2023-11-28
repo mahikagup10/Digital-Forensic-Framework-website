@@ -60,20 +60,14 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
     <div>
-      <link href="./storage-sorter.css" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='storage-sorter.css') }}" rel="stylesheet" />
 
       <div class="storage-sorter-container">
         <div class="storage-sorter-header">
-          <a href="index.html" class="storage-sorter-hero-button1 button">
+          <a href="index" class="storage-sorter-hero-button1 button">
             Home
-          </a>
-          <a href="storage.html" class="storage-sorter-hero-button11 button">
-            <span>
-              <span class="storage-sorter-text01">Back</span>
-              <br />
-            </span>
           </a>
         </div>
         <div class="storage-sorter-hero">
@@ -95,7 +89,7 @@
               <br />
             </h2>
             <span class="storage-sorter-details-sub-heading">
-              <span class="storage-sorter-text05">
+              <span class="storage-sorter-text02">
                 This tool uses the 'sorter' plugin of The Sleuth Kit, which
                 is&nbsp;
               </span>
@@ -131,12 +125,12 @@
               <div class="storage-sorter-container04">
                 <div class="storage-sorter-feature-card">
                   <div class="storage-sorter-container05">
-                    <h3 class="storage-sorter-text08 heading3">
-                      <span class="storage-sorter-text09">
+                    <h3 class="storage-sorter-text05 heading3">
+                      <span class="storage-sorter-text06">
                         Extract Files sorted by File Type
                       </span>
-                      <br class="storage-sorter-text10" />
-                      <span class="storage-sorter-text11">
+                      <br class="storage-sorter-text07" />
+                      <span class="storage-sorter-text08">
                         Enter the offset of the disk partition you wish to
                         explore. Offset value can be obtained from 'Disk
                         Partition Information' tool.
@@ -157,7 +151,7 @@
                       placeholder="placeholder"
                       class="input"
                     />
-                    <label for="offset" class="storage-sorter-text13 heading3">
+                    <label for="offset" class="storage-sorter-text10 heading3">
                       <span>Offset</span>
                       <br />
                     </label>
@@ -172,9 +166,9 @@
                     <button
                       id="sorter-button"
                       type="submit"
-                      class="storage-sorter-hero-button12 button"
+                      class="storage-sorter-hero-button11 button"
                     >
-                      <span class="storage-sorter-text16">
+                      <span class="storage-sorter-text13">
                         <span>Extract Files</span>
                         <br />
                         <br />
@@ -184,7 +178,7 @@
                 </div>
                 <div id="output-container" class="storage-sorter-feature-card1">
                   <div class="storage-sorter-container06">
-                    <h3 class="storage-sorter-text20 heading3">Output</h3>
+                    <h3 class="storage-sorter-text17 heading3">Output</h3>
                   </div>
                 </div>
               </div>
@@ -193,10 +187,10 @@
         </div>
         <div class="storage-sorter-details1">
           <div class="storage-sorter-container07">
-            <h3 class="storage-sorter-text21 heading3">
+            <h3 class="storage-sorter-text18 heading3">
               Disk Image Information
             </h3>
-            <h3 class="storage-sorter-text22 heading3">
+            <h3 class="storage-sorter-text19 heading3">
               Helps to analyze various file systems, including FAT, NTFS, ext.
               which are represented with different offsets. Disk image
               information is essential for interpreting the file system
@@ -204,10 +198,10 @@
               metadata. It aids in the identification and recovery of deleted or
               hidden files as well.
             </h3>
-            <h3 class="storage-sorter-text23 heading3">
+            <h3 class="storage-sorter-text20 heading3">
               Partition Information
             </h3>
-            <h3 class="storage-sorter-text24 heading3">
+            <h3 class="storage-sorter-text21 heading3">
               Provides key details about a file system, including type, size,
               layout, and metadata, crucial for digital forensic analysis by
               revealing the structural and organizational aspects of the
@@ -219,12 +213,12 @@
           <div class="storage-sorter-faq-container">
             <div class="storage-sorter-faq1">
               <div class="storage-sorter-container08">
-                <span class="storage-sorter-text25 sectionTitle">
+                <span class="storage-sorter-text22 sectionTitle">
                   <span>FAQ</span>
                   <br />
                 </span>
-                <h2 class="storage-sorter-text28 heading2">Common questions</h2>
-                <span class="storage-sorter-text29">
+                <h2 class="storage-sorter-text25 heading2">Common questions</h2>
+                <span class="storage-sorter-text26">
                   <span>
                     Here are some of the most common questions that we get.
                   </span>
@@ -328,11 +322,11 @@
         <div class="storage-sorter-footer">
           <footer class="storage-sorter-footer1">
             <div class="storage-sorter-container10"></div>
-            <span class="storage-sorter-text46">
+            <span class="storage-sorter-text43">
               Digital Forensic Framework
             </span>
             <div class="storage-sorter-separator"></div>
-            <span class="storage-sorter-text47">
+            <span class="storage-sorter-text44">
               Dhruv Suvarna, Mahesh KM, Mahika Gupta, Sonal Gabburi
             </span>
           </footer>

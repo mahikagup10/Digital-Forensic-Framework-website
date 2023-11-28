@@ -60,20 +60,14 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
     <div>
-      <link href="./storage-tskrecover.css" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='storage-tskrecover.css') }}" rel="stylesheet" />
 
       <div class="storage-tskrecover-container">
         <div class="storage-tskrecover-header">
-          <a href="index.html" class="storage-tskrecover-hero-button1 button">
+          <a href="index" class="storage-tskrecover-hero-button1 button">
             Home
-          </a>
-          <a
-            href="storage.html"
-            class="storage-tskrecover-hero-button11 button"
-          >
-            Back
           </a>
         </div>
         <div class="storage-tskrecover-hero">
@@ -147,9 +141,9 @@
                   >
                     <input
                       type="hidden"
-                      name="action"
-                      value="recover"
                       placeholder="placeholder"
+                      value="recover"
+                      name="action"
                       class="input"
                     />
                     <label
@@ -162,10 +156,10 @@
                     </label>
                     <input
                       type="text"
+                      placeholder="Enter Offset"
                       id="offset"
                       name="offset"
                       required=""
-                      placeholder="Enter Offset"
                       class="storage-tskrecover-textinput1 input"
                     />
                     <label
@@ -177,16 +171,16 @@
                     </label>
                     <input
                       type="text"
+                      placeholder="Enter path to local directory"
                       id="dire"
                       name="dire"
                       required=""
-                      placeholder="Enter path to local directory"
                       class="storage-tskrecover-textinput2 input"
                     />
                     <button
                       id="recover-button"
                       type="submit"
-                      class="storage-tskrecover-hero-button12 button"
+                      class="storage-tskrecover-hero-button11 button"
                     >
                       <span class="storage-tskrecover-text14">
                         <span>Extract Files</span>

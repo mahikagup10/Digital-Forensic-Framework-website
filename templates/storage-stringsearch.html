@@ -60,20 +60,14 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
     <div>
-      <link href="./storage-stringsearch.css" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='storage-stringsearch.css') }}" rel="stylesheet" />
 
       <div class="storage-stringsearch-container">
         <div class="storage-stringsearch-header">
-          <a href="index.html" class="storage-stringsearch-hero-button1 button">
+          <a href="index" class="storage-stringsearch-hero-button1 button">
             Home
-          </a>
-          <a
-            href="storage.html"
-            class="storage-stringsearch-hero-button11 button"
-          >
-            Back
           </a>
         </div>
         <div class="storage-stringsearch-hero">
@@ -145,9 +139,9 @@
                   >
                     <input
                       type="hidden"
+                      placeholder="placeholder"
                       name="action"
                       value="stringsearch"
-                      placeholder="placeholder"
                       class="input"
                     />
                     <label
@@ -160,10 +154,10 @@
                     </label>
                     <input
                       type="text"
+                      placeholder="Enter Offset"
                       id="offset"
                       name="offset"
                       required=""
-                      placeholder="Enter Offset"
                       class="storage-stringsearch-textinput1 input"
                     />
                     <label
@@ -175,16 +169,16 @@
                     </label>
                     <input
                       type="text"
+                      placeholder="Enter String"
                       id="searchString"
                       name="searchString"
                       required=""
-                      placeholder="Enter String"
                       class="storage-stringsearch-textinput2 input"
                     />
                     <button
                       id="stringsearch-button"
                       type="submit"
-                      class="storage-stringsearch-hero-button12 button"
+                      class="storage-stringsearch-hero-button11 button"
                     >
                       <span class="storage-stringsearch-text15">
                         <span>Search&nbsp;</span>

@@ -60,20 +60,14 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
     <div>
-      <link href="./storage-jpegextract.css" rel="stylesheet" />
+      <link href="{{ url_for('static', filename='storage-jpegextract.css') }}" rel="stylesheet" />
 
       <div class="storage-jpegextract-container">
         <div class="storage-jpegextract-header">
-          <a href="index.html" class="storage-jpegextract-hero-button1 button">
+          <a href="index" class="storage-jpegextract-hero-button1 button">
             Home
-          </a>
-          <a
-            href="storage.html"
-            class="storage-jpegextract-hero-button11 button"
-          >
-            Back
           </a>
         </div>
         <div class="storage-jpegextract-hero">
@@ -171,7 +165,7 @@
                     <button
                       id="jpeg_extract-button"
                       type="submit"
-                      class="storage-jpegextract-hero-button12 button"
+                      class="storage-jpegextract-hero-button11 button"
                     >
                       <span class="storage-jpegextract-text13">
                         <span>Extract images</span>
