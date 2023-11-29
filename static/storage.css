@@ -245,6 +245,7 @@
   transition: 0.3s;
   border-radius: var(--dl-radius-radius-radius8);
   background-color: var(--dl-color-gray-black);
+  font-weight: bold;
 }
 .storage-button:hover {
   display: flex;
@@ -286,15 +287,22 @@
   display: flex;
   padding: var(--dl-space-space-twounits);
   position: absolute;
-  align-items: flex-start;
+  align-items: center;
   border-radius: var(--dl-radius-radius-radius8);
   flex-direction: column;
   justify-content: center;
   background-color: var(--dl-color-success-500);
+  text-align: center;
 }
 .storage-text04 {
   height: 50px;
   font-family: "Raleway";
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-weight: bold;
 }
 .storage-feature-card2 {
   width: 100%;
@@ -397,6 +405,8 @@
   padding-bottom: 1.5rem;
   text-decoration: none;
   background-color: var(--dl-color-gray-black);
+  display: flex;
+  align-items: center;
 }
 .storage-hero-button11:hover {
   color: var(--dl-color-gray-white);
@@ -434,6 +444,8 @@
   padding-bottom: 1.5rem;
   text-decoration: none;
   background-color: var(--dl-color-gray-black);
+  display: flex;
+  align-items: center;
 }
 .storage-hero-button12:hover {
   color: var(--dl-color-gray-white);
@@ -466,6 +478,7 @@
   font-family: "Raleway";
   font-weight: 600;
   line-height: 28px;
+  padding-bottom: 20px;
 }
 .storage-details1 {
   width: 100%;
@@ -600,7 +613,7 @@
   height: 56px;
   position: absolute;
   align-self: center;
-  text-align: left;
+  text-align: center;
   font-family: "Raleway";
   font-weight: 600;
   line-height: 28px;
@@ -642,16 +655,20 @@
   box-shadow: 0 0 11px rgb(255, 255, 255);
 }
 .storage-text16 {
-  top: 27px;
-  left: 15px;
-  right: 15px;
-  width: 284px;
+  top: 35px;
+  left: 5px;
+  right: 20px;
+  width: 296px;
   height: 58px;
   position: absolute;
   align-self: flex-end;
   font-family: "Raleway";
   font-weight: 600;
   line-height: 28px;
+  text-align:center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .storage-text19 {
   top: 119px;
@@ -715,6 +732,7 @@
   font-family: "Raleway";
   font-weight: 600;
   line-height: 28px;
+  text-align:center;
 }
 .storage-container18 {
   gap: var(--dl-space-space-unit);
@@ -739,7 +757,7 @@
   color: var(--dl-color-gray-black);
   right: 19px;
   width: 265px;
-  bottom: 42px;
+  bottom: 70px;
   height: 109px;
   margin: auto;
   z-index: 100;
@@ -751,6 +769,7 @@
 }
 .storage-text25 {
   font-size: 16px;
+  bottom: 100px;
 }
 .storage-text27 {
   top: 27px;
@@ -760,7 +779,7 @@
   height: 50px;
   margin: auto;
   position: absolute;
-  text-align: left;
+  text-align: center;
   font-family: "Raleway";
   font-weight: 600;
   line-height: 28px;
@@ -788,7 +807,7 @@
   color: var(--dl-color-gray-black);
   right: 19px;
   width: 265px;
-  bottom: 42px;
+  bottom: 60px;
   height: 109px;
   margin: auto;
   z-index: 100;
@@ -809,7 +828,7 @@
   height: 50px;
   margin: auto;
   position: absolute;
-  text-align: left;
+  text-align: center;
   font-family: "Raleway";
   font-weight: 600;
   line-height: 28px;
@@ -837,7 +856,7 @@
   color: var(--dl-color-gray-black);
   right: 16px;
   width: 265px;
-  bottom: 44px;
+  bottom: 70px;
   height: 109px;
   margin: auto;
   z-index: 100;
@@ -859,6 +878,7 @@
   font-family: "Raleway";
   font-weight: 600;
   line-height: 28px;
+  text-align:center;
 }
 .storage-container21 {
   gap: var(--dl-space-space-unit);
@@ -883,7 +903,7 @@
   color: var(--dl-color-gray-black);
   right: 16px;
   width: 265px;
-  bottom: 44px;
+  bottom: 60px;
   height: 109px;
   margin: auto;
   z-index: 100;
@@ -895,10 +915,10 @@
   line-height: 28px;
 }
 .storage-text43 {
-  top: 145px;
   color: var(--dl-color-gray-black);
-  right: -437px;
+  right: 14px;
   width: 265px;
+  bottom: 60px;
   height: 109px;
   margin: auto;
   z-index: 100;
@@ -910,6 +930,7 @@
 }
 .storage-text44 {
   font-size: 16px;
+  
 }
 .storage-text46 {
   top: 27px;
@@ -920,6 +941,7 @@
   font-family: "Raleway";
   font-weight: 600;
   line-height: 28px;
+  text-align:center;
 }
 .storage-container22 {
   gap: var(--dl-space-space-unit);
@@ -944,7 +966,7 @@
   color: var(--dl-color-gray-black);
   right: 14px;
   width: 265px;
-  bottom: 47px;
+  bottom: 70px;
   height: 109px;
   margin: auto;
   z-index: 100;
@@ -958,7 +980,7 @@
   font-size: 16px;
 }
 .storage-text52 {
-  top: 27px;
+  top: 20px;
   left: 15px;
   width: 268px;
   height: 40px;
@@ -967,6 +989,7 @@
   font-family: "Raleway";
   font-weight: 600;
   line-height: 28px;
+  text-align:center;
 }
 .storage-container23 {
   gap: var(--dl-space-space-unit);
@@ -997,6 +1020,7 @@
   font-family: "Raleway";
   font-weight: 600;
   line-height: 28px;
+  text-align:center;
 }
 .storage-faq {
   flex: 0 0 auto;
@@ -1131,6 +1155,8 @@
   padding-bottom: 1.5rem;
   text-decoration: none;
   background-color: var(--dl-color-gray-black);
+  display: flex;
+  align-items: center;
 }
 .storage-hero-button13:hover {
   color: var(--dl-color-gray-white);
@@ -1216,6 +1242,8 @@
   }
   .storage-feature-card1 {
     flex-direction: row;
+    display: flex;
+    align-items: center;
   }
   .storage-feature-card2 {
     flex-direction: row;

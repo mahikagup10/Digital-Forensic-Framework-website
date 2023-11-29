@@ -60,24 +60,22 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
     <div>
-      <link href="./mem-hashdump-crackpass.css" rel="stylesheet" />
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='mem-hashdump-crackpass.css') }}" />
 
       <div class="mem-hashdump-crackpass-container">
         <div class="mem-hashdump-crackpass-header">
-          <a
-            href="index.html"
-            class="mem-hashdump-crackpass-hero-button1 button"
-          >
-            Home
-          </a>
-          <a
-            href="memory.html"
-            class="mem-hashdump-crackpass-hero-button11 button"
-          >
-            Back
-          </a>
+          <!--<a href="index.html" class="mem-hashdump-crackpass-hero-button1 button">Home</a>-->
+          <form method="POST" action="/">
+          <button class='mem-hashdump-crackpass-hero-button1 button' type='submit'>Home</button>
+          </form>
+
+
+          <!--<a href="memory.html" class="mem-hashdump-crackpass-hero-button11 button">Back</a>-->
+          <form method="POST" action="/memory_forensics">
+          <button class='mem-hashdump-crackpass-hero-button11 button' type='submit'>Back</button>
+          </form>
         </div>
         <div class="mem-hashdump-crackpass-hero">
           <div class="mem-hashdump-crackpass-container01">
@@ -98,14 +96,13 @@
               <br />
             </h2>
             <span class="mem-hashdump-crackpass-details-sub-heading">
-              The primary purpose of the hashdump plugin is to extract password
+              The primary purpose of the 'hashdump' plugin is to extract password
               hashes from the LSASS (Local Security Authority Subsystem Service)
               process in memory. LSASS is responsible for handling
               authentication-related tasks on Windows systems.&nbsp;The output
               of the hashdump plugin consists of user account information along
               with their corresponding password hashes. The password hashes are
-              in a format suitable for offline cracking using tools like John
-              the Ripper or Hashcat.&nbsp;
+              in a format suitable for offline cracking using tools like 'Hashcat' or 'John the Ripper'.&nbsp;
             </span>
           </div>
           <img
@@ -143,7 +140,7 @@
                   </div>
                   <form
                     id="hashdump-form"
-                    action="/memory_tools"
+                    action="/mem-hashdump.html"
                     method="POST"
                     class="mem-hashdump-crackpass-form"
                   >
@@ -165,7 +162,11 @@
                       </span>
                     </button>
                   </form>
-                  <form class="mem-hashdump-crackpass-form1">
+                  <form 
+                    id="crack-password-form"
+                    action="/mem-crackpass.html"
+                    method="POST"
+                    class="mem-hashdump-crackpass-form1">
                     <input
                       type="text"
                       id="hash_value"
@@ -364,9 +365,58 @@
         </div>
       </div>
     </div>
-    <script
-      data-section-id="navbar"
-      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
-    ></script>
+    <script>
+    
+    document.addEventListener('DOMContentLoaded', function () {
+      	
+            const outputContainer = document.getElementById('output-container');
+            const hashdumpButton = document.getElementById('hashdump-button');
+            
+            const hashdumpForm = document.getElementById('hashdump-form');
+            const crackPasswordForm = document.getElementById('crack-password-form');
+            
+            function displayOutput(output) {
+                outputContainer.innerHTML = output;
+            }
+            
+	    hashdumpForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Make an AJAX request to execute the img_stat function
+                fetch('/mem-hashdump.html', {
+                    method: 'POST',
+                    body: new FormData(hashdumpForm),
+                })
+                .then(response => response.text()) // Use text() instead of json()
+                .then(data => {
+                    displayOutput(data);
+                })
+                .catch(error => {
+                    outputContainer.innerText = 'Error: ' + error.message;
+                });
+            });
+            
+            crackPasswordForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                const formData = new FormData(crackPasswordForm);
+
+                fetch('/mem-crackpass.html', {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => response.text())
+                .then(data => {
+                    displayOutput(data); // Display output in the output container
+                })
+                .catch(error => {
+                    outputContainer.innerText = 'Error: ' + error.message;
+                });
+            });
+    
+	    
+    });
+    
+    </script>
   </body>
 </html>

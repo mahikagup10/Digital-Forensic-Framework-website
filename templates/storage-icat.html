@@ -60,23 +60,23 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
-    <div>
-      <link href="./storage-icat.css" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"> 
+    <div> 
+    	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='storage-icat.css') }}">
 
       <div class="storage-icat-container">
         <div class="storage-icat-header">
-          <a href="storage.html" class="storage-icat-hero-button1 button">
+          <a href="/storage_forensics" class="storage-icat-hero-button1 button">
             Back
           </a>
-          <a href="index.html" class="storage-icat-hero-button11 button">
-            Home
-          </a>
+          <form method="POST" action="/">
+          <button class="storage-icat-hero-button11 button" type='submit'>Home</button>
+          </form>
         </div>
         <div class="storage-icat-hero">
           <div class="storage-icat-container01">
             <h1 class="storage-icat-hero-heading heading1">
-              Storage Disk Image Analysis
+              Disk Image Analysis
             </h1>
             <span class="storage-icat-hero-sub-heading">
               Unlock the secrets hidden in captured images of your storage
@@ -136,14 +136,14 @@
                         Information' button in the Home page. The&nbsp;
                       </span>
                       <span class="storage-icat-text07">
-                        inode number of a file can be obtained from the 'List of
+                        inode number of a file can be obtained from 'View
                         Files and Directories'.
                       </span>
                     </h3>
                   </div>
                   <form
                     id="icat-form"
-                    action="/execute"
+                    action="/storage-icat.html"
                     method="POST"
                     class="storage-icat-form"
                   >
@@ -191,9 +191,9 @@
                     </button>
                   </form>
                 </div>
-                <div id="output-container" class="storage-icat-feature-card1">
+                <div class="storage-icat-feature-card1">
                   <div class="storage-icat-container06">
-                    <h3 class="storage-icat-text18 heading3">Output</h3>
+                    <h3 class="storage-icat-text18 heading3">Output</h3><div id="output-container"></div>
                   </div>
                 </div>
               </div>
@@ -342,9 +342,35 @@
         </div>
       </div>
     </div>
-    <script
-      data-section-id="navbar"
-      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
-    ></script>
+    <script>
+      	document.addEventListener('DOMContentLoaded', function () {
+
+      	    const icatButton = document.getElementById('icat-button');
+      	    const outputContainer = document.getElementById('output-container');
+      	    const icatForm = document.getElementById('icat-form');
+
+      	    function displayOutput(output) {
+                    const outputContainer = document.getElementById('output-container');
+    		    outputContainer.innerHTML = output;
+            }
+
+      	    icatForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Make an AJAX request to execute the icat function
+                fetch('/storage-icat.html', {
+                    method: 'POST',
+                    body: new FormData(icatForm),
+                })
+                .then(response => response.text()) // Use text() instead of json()
+                .then(data => {
+                    displayOutput(data);
+                })
+                .catch(error => {
+                    outputContainer.innerText = 'Error: ' + error.message;
+                });
+            });
+        });
+    </script>
   </body>
 </html>

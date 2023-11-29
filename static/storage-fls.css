@@ -53,6 +53,10 @@
   padding-bottom: 1.5rem;
   text-decoration: none;
   background-color: var(--dl-color-gray-black);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center
 }
 .storage-fls-hero-button1:hover {
   color: var(--dl-color-gray-white);
@@ -549,6 +553,10 @@
   color: var(--dl-color-gray-white);
   border-color: rgba(41, 20, 119, 0.9);
   background-color: rgba(41, 20, 119, 0.9);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center
 }
 @media(max-width: 991px) {
   .storage-fls-hero {

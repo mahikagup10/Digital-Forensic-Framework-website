@@ -57,14 +57,20 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
     <div>
-      <link href="./mem-pslist.css" rel="stylesheet" />
+      <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='mem-pslist.css') }}" />
 
       <div class="mem-pslist-container">
         <div class="mem-pslist-header">
-          <a href="index.html" class="mem-pslist-hero-button1 button">Home</a>
-          <a href="memory.html" class="mem-pslist-hero-button11 button">Back</a>
+          <!--<a href="index.html" class="mem-pslist-hero-button1 button">Home</a>-->
+          <form method="POST" action="/">
+          <button class='mem-pslist-hero-button1 button' type='submit'>Home</button>
+          </form>
+          <!--<a href="memory.html" class="mem-pslist-hero-button11 button">Back</a>-->
+           <form method="POST" action="/memory_forensics">
+          <button class='mem-pslist-hero-button11 button' type='submit'>Back</button>
+          </form>
         </div>
         <div class="mem-pslist-hero">
           <div class="mem-pslist-container01">
@@ -84,7 +90,7 @@
               <br />
             </h2>
             <span class="mem-pslist-details-sub-heading">
-              The pslist plugin in Volatility is a memory forensics tool that
+              The 'pslist' plugin in Volatility is a memory forensics tool that
               enumerates running processes from a Windows or Linux memory dump.
               It provides a comprehensive overview of the processes that were
               active on a system at the time the memory dump was created,
@@ -115,7 +121,7 @@
                   </div>
                   <form
                     id="pslist-form"
-                    action="/execute"
+                    action="/mem-pslist.html"
                     method="POST"
                     class="mem-pslist-form"
                   >
@@ -290,9 +296,39 @@
         </div>
       </div>
     </div>
-    <script
-      data-section-id="navbar"
-      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
-    ></script>
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function () {
+      	
+            const outputContainer = document.getElementById('output-container');
+            const pslistButton = document.getElementById('pslist-button');
+            
+            const pslistForm = document.getElementById('pslist-form');
+            
+            function displayOutput(output) {
+                outputContainer.innerHTML = output;
+            }
+            
+	    pslistForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Make an AJAX request to execute the img_stat function
+                fetch('/mem-pslist.html', {
+                    method: 'POST',
+                    body: new FormData(pslistForm),
+                })
+                .then(response => response.text()) // Use text() instead of json()
+                .then(data => {
+                    displayOutput(data);
+                })
+                .catch(error => {
+                    outputContainer.innerText = 'Error: ' + error.message;
+                });
+            });
+    
+	    
+    });
+    
+    </script>
   </body>
 </html>

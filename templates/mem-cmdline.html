@@ -60,16 +60,20 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
     <div>
-      <link href="./mem-cmdline.css" rel="stylesheet" />
-
+       <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='mem-cmdline.css') }}" />
+       
       <div class="mem-cmdline-container">
         <div class="mem-cmdline-header">
-          <a href="index.html" class="mem-cmdline-hero-button1 button">Home</a>
-          <a href="memory.html" class="mem-cmdline-hero-button11 button">
-            Back
-          </a>
+          <!--<a href="index.html" class="mem-cmdline-hero-button1 button">Home</a>-->
+          <form method="POST" action="/">
+          <button class='mem-cmdline-hero-button1 button' type='submit'>Home</button>
+          </form>
+          <!--<a href="memory.html" class="mem-cmdline-hero-button11 button">Back</a>-->
+          <form method="POST" action="/memory_forensics">
+          <button class='mem-cmdline-hero-button11 button' type='submit'>Back</button>
+          </form>
         </div>
         <div class="mem-cmdline-hero">
           <div class="mem-cmdline-container01">
@@ -90,10 +94,10 @@
               <br />
             </h2>
             <span class="mem-cmdline-details-sub-heading">
-              This tool uses the cmdline plugin of The Sleuth Kit to display the
+              This tool uses the 'cmdline' plugin of The Sleuth Kit to display the
               process command-line arguments. This plugin can be used to detect
               whether the process is launched using a malicious command or not.
-              It helps in differentiating a legitimate and a malicious
+              It also helps in differentiating a legitimate and a malicious
               executable by locating it's path.
             </span>
           </div>
@@ -125,7 +129,7 @@
                   </div>
                   <form
                     id="cmdline-form"
-                    action="/execute"
+                    action="/mem-cmdline.html"
                     method="POST"
                     class="mem-cmdline-form"
                   >
@@ -302,9 +306,39 @@
         </div>
       </div>
     </div>
-    <script
-      data-section-id="navbar"
-      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
-    ></script>
+    <script>
+    
+    document.addEventListener('DOMContentLoaded', function () {
+      	
+            const outputContainer = document.getElementById('output-container');
+            const cmdlineButton = document.getElementById('cmdline-button');
+            
+            const cmdlineForm = document.getElementById('cmdline-form');
+            
+            function displayOutput(output) {
+                outputContainer.innerHTML = output;
+            }
+            
+	    cmdlineForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Make an AJAX request to execute the img_stat function
+                fetch('/mem-cmdline.html', {
+                    method: 'POST',
+                    body: new FormData(cmdlineForm),
+                })
+                .then(response => response.text()) // Use text() instead of json()
+                .then(data => {
+                    displayOutput(data);
+                })
+                .catch(error => {
+                    outputContainer.innerText = 'Error: ' + error.message;
+                });
+            });
+    
+	    
+    });
+    
+    </script>
   </body>
 </html>

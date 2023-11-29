@@ -53,6 +53,10 @@
   padding-bottom: 1.5rem;
   text-decoration: none;
   background-color: var(--dl-color-gray-black);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center
 }
 .storage-sorter-hero-button1:hover {
   color: var(--dl-color-gray-white);
@@ -77,6 +81,10 @@
   padding-bottom: 1.5rem;
   text-decoration: none;
   background-color: var(--dl-color-gray-black);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center
 }
 .storage-sorter-hero-button11:hover {
   color: var(--dl-color-gray-white);

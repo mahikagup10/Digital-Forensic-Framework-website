@@ -66,7 +66,7 @@
         <div class="storage-hero">
           <div class="storage-container01">
             <h1 class="storage-hero-heading heading1">
-              Storage Disk Image Analysis
+              Disk Image Analysis
             </h1>
             <span class="storage-hero-sub-heading">
               Unlock the secrets hidden in captured images of your storage
@@ -125,7 +125,7 @@
                     <input
                       type="file"
                       name="file"
-                      accept=".mem, .dump, .dd"
+                      accept=".mem, .dump, .dd, .raw"
                       placeholder="placeholder"
                       class="storage-textinput input"
                     />
@@ -146,9 +146,10 @@
                   <div class="storage-container05">
                     <div class="storage-container06">
                       <h3 class="storage-text03 heading3">Upload Disk Image</h3>
+                      <h5> (Supported formats: .raw, .E01) </h5>
                     </div>
                   </div>
-                  <div style="display: none;" class="storage-feature-card1">
+                  <div id="upload-banner" style="display: none;" class="storage-feature-card1">
                     <span class="storage-text04">
                       Disk Image uploaded successfully!
                     </span>
@@ -172,7 +173,7 @@
                   <div class="storage-container11"></div>
                   <form
                     id="image-info-form"
-                    action="/execute"
+                    action="/storage-imgstat"
                     method="POST"
                     class="storage-form1"
                   >
@@ -183,17 +184,17 @@
                       placeholder="placeholder"
                       class="input"
                     />
-                    <a
-                      href="#features-upload-image-info"
+                    <button
+                      type="submit"
                       id="image-info-button"
                       class="storage-hero-button11 button"
                     >
                       View Disk Image Info
-                    </a>
+                    </button>
                   </form>
                   <form
                     id="partition-info-form"
-                    action="/execute"
+                    action="/storage-mmls"
                     method="POST"
                     class="storage-form2"
                   >
@@ -204,19 +205,20 @@
                       placeholder="placeholder"
                       class="input"
                     />
-                    <a
-                      href="#features-upload-image-info"
+                    <button
+                      type="submit"
                       id="partition-info-button"
                       class="storage-hero-button12 button"
                     >
                       View Disk Partition Info
-                    </a>
+                    </button>
                   </form>
                 </div>
-                <div id="output-container" class="storage-feature-card3">
-                  <div class="storage-container12">
-                    <h3 class="storage-text07 heading3">Output</h3>
-                  </div>
+                <div class="storage-feature-card3">
+                 <!-- <div class="storage-container12"> -->
+                    <h3 class="storage-text07 heading3">Output</h3><br>
+                    <div id="output-container"></div>
+                 <!-- </div> -->
                 </div>
               </div>
             </div>
@@ -235,10 +237,7 @@
             </h3>
             <h3 class="storage-text10 heading3">Partition Information</h3>
             <h3 class="storage-text11 heading3">
-              Provides key details about a file system, including type, size,
-              layout, and metadata, crucial for digital forensic analysis by
-              revealing the structural and organizational aspects of the
-              specified file system based on user input.
+              Provides key details about the layout of partitions within a disk image. It reveals details such as partition start and end offsets, sizes, types (like NTFS, FAT, etc.), and other metadata related to partitions. By listing the partitions and their structure, it assists forensic examiners in understanding how the disk is divided into logical sections. This information is crucial for identifying potential areas where data might be stored and for carving out specific file systems or data types during an investigation.
             </h3>
           </div>
         </div>
@@ -255,8 +254,8 @@
                   </h3>
                   <h3 class="storage-text13 heading3">
                     <span class="storage-text14">
-                      Use fls to list allocated and deleted files and
-                      directories.
+                      Use the 'fls' plugin to list all files and
+                      directories in allocated as well as unallocated space (deleted files and directories).
                     </span>
                     <br />
                   </h3>
@@ -270,7 +269,7 @@
                   </h3>
                   <h3 class="storage-text19 heading3">
                     <span class="storage-text20">
-                      Use fsstat to view file system statistics and details
+                      Use the 'fsstat' tool to view file system statistics and details
                       including layouts, sizes and labels.
                     </span>
                     <br />
@@ -280,8 +279,8 @@
               <a href="storage-ils.html">
                 <div class="storage-container17">
                   <h3 class="storage-text22 heading3">
-                    Use ils command to list inode structures and their
-                    information.
+                    Use the 'ils' command to list the inode structures and their
+                    information. inodes are pointers to files and directories.
                   </h3>
                   <h3 class="storage-text23 heading3">
                     View Inode Information
@@ -292,8 +291,8 @@
                 <div class="storage-container18">
                   <h3 class="storage-text24 heading3">
                     <span class="storage-text25">
-                      Use jpeg_extract to export all jpeg images onto a local
-                      directory
+                      Use the 'jpeg_extract' plugin to export all jpg/jpeg images onto a local
+                      directory.
                     </span>
                     <br />
                   </h3>
@@ -307,7 +306,7 @@
                 <div class="storage-container19">
                   <h3 class="storage-text30 heading3">
                     <span class="storage-text31">
-                      Sorter sorts files based on their file type while also
+                      Use the 'sorter' command, which extracts and sorts files based on their file type by
                       performing extension checking.
                     </span>
                     <br />
@@ -322,8 +321,8 @@
                 <div class="storage-container20">
                   <h3 class="storage-text36 heading3">
                     <span class="storage-text37">
-                      Use icat to view the data units of a file, specified by
-                      its metadata address.
+                      Use the 'icat' plugin to view the data units of a file, specified by
+                      its metadata address (inode).
                     </span>
                     <br />
                   </h3>
@@ -336,14 +335,7 @@
               <a href="storage-stringsearch.html">
                 <div class="storage-container21">
                   <h3 class="storage-text42 heading3">
-                    Search for a particular string in a partition
-                  </h3>
-                  <h3 class="storage-text43 heading3">
-                    <span class="storage-text44">
-                      tsk_recover extracts the unallocated or allocated files
-                      from the disk image to local directory.&nbsp;
-                    </span>
-                    <br />
+                    Use a combination of tools to ssearch for specific strings, keywords, or patterns within a specific partition.
                   </h3>
                   <h3 class="storage-text46 heading3">
                     <span>Search for a String</span>
@@ -355,9 +347,7 @@
                 <div class="storage-container22">
                   <h3 class="storage-text49 heading3">
                     <span class="storage-text50">
-                      This functionality uses the hashdump plugin to extract
-                      NTLM hashed passwords which can be decrypted with John the
-                      Ripper..
+                      This functionality uses the 'istat' plugin to display detailed information about metadata structures.
                     </span>
                     <br />
                   </h3>
@@ -369,6 +359,13 @@
               </a>
               <a href="storage-tskrecover.html">
                 <div class="storage-container23">
+                <h3 class="storage-text43 heading3">
+                    <span class="storage-text44">
+                      Use the 'tsk_recover' plugin to extract allocated or unallocated (deleted) files
+                      from the disk image to a local directory.&nbsp;
+                    </span>
+                    <br />
+                  </h3>
                   <h3 class="storage-text55 heading3">
                     <span>Extract all files from Partition</span>
                     <br />
@@ -498,12 +495,101 @@
             </span>
           </footer>
         </div>
-        <a href="index.html" class="storage-hero-button13 button">Home</a>
+        <!-- <a href="index.html" class="storage-hero-button13 button">Home</a> -->
+        <form method="POST" action="/">
+          <button class='storage-hero-button13 button' type='submit'>Home</button>
+          </form>
       </div>
     </div>
-    <script
-      data-section-id="navbar"
-      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
-    ></script>
+    <script>
+    
+    document.addEventListener('DOMContentLoaded', function () {
+    
+    const outputContainer = document.getElementById('output-container');
+    const uploadBanner = document.getElementById('upload-banner');
+    
+    const imageInfoButton = document.getElementById('image-info-button');
+    const partitionInfoButton = document.getElementById('partition-info-button');
+    
+    const fileUploadForm = document.getElementById('file-upload-form');
+    const imageInfoForm = document.getElementById('image-info-form');
+    const partitionInfoForm = document.getElementById('partition-info-form');
+    
+    function displayUploadBanner() {
+                uploadBanner.style.display = 'block';
+                setTimeout(function() {
+                    uploadBanner.style.display = 'none';
+                }, 50000); // Hide the banner after 5 seconds (you can adjust the duration).
+            }
+            
+    function displayOutput(output) {
+                    const outputContainer = document.getElementById('output-container');
+    		    outputContainer.innerHTML = output;
+            }
+            
+            
+
+    fileUploadForm.addEventListener('submit', async function (event) {
+		    event.preventDefault(); // Prevent the default form submission
+		    const formData = new FormData(fileUploadForm);
+
+		    try {
+			const response = await fetch('/storage_upload', {
+			    method: 'POST',
+			    body: formData,
+			});
+
+			if (response.ok) {
+			    // File was successfully uploaded
+			    displayUploadBanner();
+			} else {
+			    // Handle errors here
+			    outputContainer.innerText = 'Error: ' + response.statusText;
+			}
+		    } catch (error) {
+			outputContainer.innerText = 'Error: ' + error.message;
+		    }
+		});
+		
+		
+     imageInfoForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the default form submission
+                
+
+                // Make an AJAX request to execute the img_stat function
+                fetch('/storage-imgstat', {
+                    method: 'POST',
+                    body: new FormData(imageInfoForm),
+                })
+                .then(response => response.text()) // Use text() instead of json()
+                .then(data => {
+                    displayOutput(data);
+                /*    outputContainer.innerHTML = data; */
+                })
+                .catch(error => {
+                    outputContainer.innerText = 'Error: ' + error.message;
+                });
+            });
+
+    partitionInfoForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Make an AJAX request to execute the mmls function
+                fetch('/storage-mmls', {
+                    method: 'POST',
+                    body: new FormData(partitionInfoForm),
+                })
+                .then(response => response.text()) // Use text() instead of json()
+                .then(data => {
+                    displayOutput(data);
+                })
+                .catch(error => {
+                    outputContainer.innerText = 'Error: ' + error.message;
+                });
+            });
+		
+    
+    });
+    </script>
   </body>
 </html>

@@ -210,10 +210,11 @@
   margin-bottom: var(--dl-space-space-oneandhalfunits);
 }
 .home-hero-button12 {
-  left: 21px;
+  left: 10px;
   color: rgb(255, 255, 255);
-  bottom: 37px;
-  position: absolute;
+  bottom: 0px;
+  /*position: absolute;*/
+  position: relative;
   font-size: 18px;
   transition: 0.3s;
   font-weight: bold;
@@ -227,6 +228,7 @@
   padding-bottom: 1.5rem;
   text-decoration: none;
   background-color: rgba(0, 0, 0, 0.99);
+  margin-top: 20px;
 }
 .home-hero-button12:hover {
   background-color: var(--dl-color-primary1-blue100);

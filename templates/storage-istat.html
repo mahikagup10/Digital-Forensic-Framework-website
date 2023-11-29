@@ -60,23 +60,23 @@
     </style>
   </head>
   <body>
-    <link rel="stylesheet" href="./style.css" />
-    <div>
-      <link href="./storage-istat.css" rel="stylesheet" />
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}"> 
+    <div> 
+    	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='storage-istat.css') }}">
 
       <div class="storage-istat-container">
         <div class="storage-istat-header">
-          <a href="index.html" class="storage-istat-hero-button1 button">
-            Home
-          </a>
-          <a href="storage.html" class="storage-istat-hero-button11 button">
+                    <form method="POST" action="/">
+          <button class="storage-istat-hero-button1 button" type='submit'>Home</button>
+          </form>
+          <a href="/storage_forensics" class="storage-istat-hero-button11 button">
             Back
           </a>
         </div>
         <div class="storage-istat-hero">
           <div class="storage-istat-container01">
             <h1 class="storage-istat-hero-heading heading1">
-              Storage Disk Image Analysis
+              Disk Image Analysis
             </h1>
             <span class="storage-istat-hero-sub-heading">
               Unlock the secrets hidden in captured images of your storage
@@ -135,14 +135,14 @@
                         Information' button, and the&nbsp;
                       </span>
                       <span class="storage-istat-text07">
-                        inode number from the 'List of Files and Directories'
+                        inode number from the 'View Files and Directories'
                         tool.
                       </span>
                     </h3>
                   </div>
                   <form
                     id="istat-form"
-                    action="/execute"
+                    action="/storage-istat.html"
                     method="POST"
                     class="storage-istat-form"
                   >
@@ -190,9 +190,9 @@
                     </button>
                   </form>
                 </div>
-                <div id="output-container" class="storage-istat-feature-card1">
+                <div class="storage-istat-feature-card1">
                   <div class="storage-istat-container06">
-                    <h3 class="storage-istat-text18 heading3">Output</h3>
+                    <h3 class="storage-istat-text18 heading3">Output</h3><div id="output-container"></div>
                   </div>
                 </div>
               </div>
@@ -343,9 +343,35 @@
         </div>
       </div>
     </div>
-    <script
-      data-section-id="navbar"
-      src="https://unpkg.com/@teleporthq/teleport-custom-scripts"
-    ></script>
+    <script>
+      	document.addEventListener('DOMContentLoaded', function () {
+
+      	    const istatButton = document.getElementById('istat-button');
+      	    const outputContainer = document.getElementById('output-container');
+      	    const istatForm = document.getElementById('istat-form');
+
+      	    function displayOutput(output) {
+                    const outputContainer = document.getElementById('output-container');
+    		    outputContainer.innerHTML = output;
+            }
+
+      	    istatForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                // Make an AJAX request to execute the istat function
+                fetch('/storage-istat.html', {
+                    method: 'POST',
+                    body: new FormData(istatForm),
+                })
+                .then(response => response.text()) // Use text() instead of json()
+                .then(data => {
+                    displayOutput(data);
+                })
+                .catch(error => {
+                    outputContainer.innerText = 'Error: ' + error.message;
+                });
+            });
+        });
+    </script>
   </body>
 </html>
